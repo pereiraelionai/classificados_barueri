@@ -18,6 +18,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/bb3315e9fa.js" crossorigin="anonymous"></script>
+
+    <style type="text/css">
+
+        @font-face {
+            font-family: "Abalone";
+            src: url("fonte/AbaloneSmile.woff2");
+        }
+
+    </style>
 
 </head>
 <body>
