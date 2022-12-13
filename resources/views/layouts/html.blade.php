@@ -35,6 +35,8 @@
 </head>
 <body>
     @yield('conteudo')
+    @extends('layouts.footer')
+
 </body>
 </html>
 
