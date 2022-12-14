@@ -89,7 +89,7 @@ ul li a:hover {
 
 .img_carousel {
     width: 100%;
-    height: 500px;
+    height: 400px;
 }
 
 .bd-placeholder-img {
@@ -149,4 +149,8 @@ ul li a:hover {
 
   footer {
     color: rgb(84, 64, 91);
+  }
+
+  .album {
+    margin-top: -20px;
   }
