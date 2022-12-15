@@ -28,7 +28,7 @@ class CreateAnuncioEmpregosTable extends Migration
             $table->date('data_inicio');
             $table->unsignedBigInteger('tipo_anuncios_id')->default(3);
             $table->boolean('ativo')->default(true);
-            $table->timestamps();;
+            $table->timestamps();   
         });
     }
 

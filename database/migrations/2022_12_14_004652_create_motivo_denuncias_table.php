@@ -18,6 +18,11 @@ class CreateMotivoDenunciasTable extends Migration
             $table->string('nome_motivo');
             $table->timestamps();
         });
+
+        Schema::table('denuncias', function (Blueprint $table) {
+            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('motivo_denuncias_id')->references('id')->on('motivo_denuncias');
+        });
     }
 
     /**
@@ -26,7 +31,12 @@ class CreateMotivoDenunciasTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {   
+        Schema::table('denuncias', function(Blueprint $table) {
+            $table->dropForeign('denuncias_motivo_denuncias_id_foreign');
+            $table->dropForeign('denuncias_users_id_foreign');
+        });
+
         Schema::dropIfExists('motivo_denuncias');
     }
 }
