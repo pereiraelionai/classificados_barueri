@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('sobrenome');
             $table->string('cpf')->unique();
             $table->string('celular');
-            $table->string('telefone');
+            $table->string('telefone')->nullable();
             $table->string('endereco');
             $table->string('numero');
             $table->string('bairro');

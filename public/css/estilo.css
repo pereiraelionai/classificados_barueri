@@ -154,3 +154,13 @@ ul li a:hover {
   .album {
     margin-top: -20px;
   }
+
+  .header-login {
+    background-color: rgb(84, 64, 91);
+    color: white;
+    font-weight: bold;
+  }
+
+  .header-card {
+    background-color: rgb(226, 212, 231);
+  }
