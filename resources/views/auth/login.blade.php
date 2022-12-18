@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,8 +68,6 @@
     </style>
 
     
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
@@ -80,8 +78,8 @@
         <a href="{{ route('index') }}"><img src="{{ asset('img/logo_classificados.png') }}" class="logo_login"></a>
         <h1 class="h3 mb-3 fw-normal">Faça seu login!</h1>
 
-        <div class="form-floating">
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-mail">
+        <div class="form-floating mb-2">
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"  placeholder="E-mail">
 
             @error('email')
                 <span class="invalid-feedback" role="alert">

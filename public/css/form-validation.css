@@ -1,0 +1,18 @@
+.container {
+  max-width: 960px;
+}
+
+.logo_register {
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+.btn-register {
+  background-color: rgb(84, 64, 91);
+  color: white;
+}
+
+.btn-register:hover {
+  background-color: #44354a;;
+  color: white;
+}
