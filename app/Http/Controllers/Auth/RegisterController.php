@@ -48,11 +48,37 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+    {   
+        
+        return Validator::make($data, 
+        [
+            'nome' => ['required', 'string', 'max:80'],
+            'sobrenome' => ['required', 'string', 'max:255'],
+            'cpf' => ['required', 'string', 'unique:users', 'cpf'],
+            'celular' => ['required', 'string'],
+            'endereco' => ['required', 'string', 'max:80'],
+            'numero' => ['required', 'integer', 'max:999999'],
+            'bairro' => ['required', 'string', 'max:40'],
+            'cidade' => ['required', 'string', 'max:30'],
+            'estado' => ['required', 'string', 'max:2'],
+            'complemento' => ['max:255'],
+            'email' => ['required', 'string', 'email', 'max:60', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ], 
+        [
+            'required' => 'O campo :attribute é obrigatório',
+            'string' => 'O campo :attribute é inválido',
+            'nome.max' => 'O nome deve conter no máximo 80 caracteres',
+            'sobrenome.max' => 'O sobrenome deve conter no máximo 255 caracteres',
+            'endereco.max' => 'O endereco deve conter no máximo 80 caracteres',
+            'numero.max' => 'O numero deve conter no máximo 8 caracteres',
+            'bairro.max' => 'O bairro deve conter no máximo 40 caracteres',
+            'cidade.max' => 'A cidade deve conter no máximo 30 caracteres',
+            'complemento.max' => 'O complemento deve conter no máximo 255 caracteres',
+            'email.max' => 'O email deve conter no máximo 60 caracteres',
+            'unique' => 'O :attribute já existe no banco de dados',
+            'email' => 'Por favor digite um email válido',
+            'password.confirmed' => 'As senhas digitadas não correspondem',
         ]);
     }
 
@@ -63,9 +89,19 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
+    {   
         return User::create([
-            'name' => $data['name'],
+            'nome' => $data['nome'],
+            'sobrenome' => $data['sobrenome'],
+            'cpf' => $data['cpf'],
+            'celular' => $data['celular'],
+            'telefone' => $data['telefone'],
+            'endereco' => $data['endereco'],
+            'numero' => $data['numero'],
+            'bairro' => $data['bairro'],
+            'cidade' => $data['cidade'],
+            'estado' => $data['estado'],
+            'complemento' => $data['complemento'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

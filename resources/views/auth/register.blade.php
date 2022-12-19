@@ -15,6 +15,10 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/form-validation.css') }}" rel="stylesheet">
 
+        <!--JS-->
+        <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/utils.js') }}"></script>
+
         <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -82,9 +86,10 @@
         <div class="row g-5">
         <div class="col-md">
             <form class="needs-validation" method="POST" action="{{ route('register') }}">
+                @csrf
                 <div class="row g-3">
                     <div class="col-12 mb-4">
-                        <label for="nome" class="form-label">Nome</label>
+                        <label for="nome" class="form-label">Nome<span style="color: red;">*</span></label>
                         <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('name') }}" required autocomplete="nome">
 
                         @error('nome')
@@ -95,7 +100,7 @@
                     </div>
 
                     <div class="col-12 mb-4">
-                        <label for="sobrenome" class="form-label">Sobrenome</label>
+                        <label for="sobrenome" class="form-label">Sobrenome<span style="color: red;">*</span></label>
                         <input id="sobrenome" type="text" class="form-control @error('sobrenome') is-invalid @enderror" name="sobrenome" value="{{ old('sobrenome') }}" required autocomplete="sobrenome">
 
                         @error('sobrenome')
@@ -106,19 +111,8 @@
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="usuario" class="form-label">Usuário</label>
-                        <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
-
-                        @error('usuario')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <label for="cpf" class="form-label">CPF</label>
-                        <input id="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf">
+                        <label for="cpf" class="form-label">CPF<span style="color: red;">*</span></label>
+                        <input id="cpf" type="text" class="mascara-cpf form-control @error('cpf') is-invalid @enderror" name="cpf" maxlength="14" value="{{ old('cpf') }}" required autocomplete="cpf">
 
                         @error('cpf')
                         <span class="invalid-feedback" role="alert">
@@ -128,7 +122,7 @@
                     </div>
 
                     <div class="col-12 mb-4">
-                        <label for="username" class="form-label">Email</label>
+                        <label for="username" class="form-label">Email<span style="color: red;">*</span></label>
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                         @error('email')
@@ -139,7 +133,7 @@
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="celular" class="form-label">Celular</label>
+                        <label for="celular" class="form-label">Celular<span style="color: red;">*</span></label>
                         <input id="celular" type="text" class="form-control @error('celular') is-invalid @enderror" name="celular" value="{{ old('celular') }}" required autocomplete="celular">
 
                         @error('celular')
@@ -151,7 +145,7 @@
 
                     <div class="col-md-6 mb-4">
                         <label for="telefone" class="form-label">Telefone</label>
-                        <input id="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ old('telefone') }}" required autocomplete="telefone">
+                        <input id="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ old('telefone') }}" autocomplete="telefone">
 
                         @error('telefone')
                         <span class="invalid-feedback" role="alert">
@@ -161,7 +155,7 @@
                     </div>                    
 
                     <div class="col-md-10 mb-4">
-                        <label for="endereco" class="form-label">Endereço</label>
+                        <label for="endereco" class="form-label">Endereço<span style="color: red;">*</span></label>
                         <input id="endereco" type="text" class="form-control @error('endereco') is-invalid @enderror" name="endereco" value="{{ old('endereco') }}" required autocomplete="endereco">
 
                         @error('endereco')
@@ -173,7 +167,7 @@
                     </div>
 
                     <div class="col-md-2 mb-4">
-                        <label for="numero" class="form-label">Numero</label>
+                        <label for="numero" class="form-label">Numero<span style="color: red;">*</span></label>
                         <input id="numero" type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{ old('numero') }}" required autocomplete="numero">
 
                         @error('numero')
@@ -185,7 +179,7 @@
                     </div>
 
                     <div class="col-md-5 mb-4">
-                        <label for="bairro" class="form-label">Bairro</label>
+                        <label for="bairro" class="form-label">Bairro<span style="color: red;">*</span></label>
                         <input id="bairro" type="text" class="form-control @error('bairro') is-invalid @enderror" name="bairro" value="{{ old('bairro') }}" required autocomplete="bairro">
 
                         @error('bairro')
@@ -197,8 +191,8 @@
                     </div>      
 
                     <div class="col-md-4 mb-4">
-                        <label for="cidade" class="form-label">Cidade</label>
-                        <input id="cidade" type="text" class="form-control @error('bairro') is-invalid @enderror" name="bairro" value="{{ old('bairro') }}" required autocomplete="bairro">
+                        <label for="cidade" class="form-label">Cidade<span style="color: red;">*</span></label>
+                        <input id="cidade" type="text" class="form-control @error('bairro') is-invalid @enderror" name="cidade" value="{{ old('cidade') }}" required autocomplete="cidade">
 
                         @error('numero')
                         <span class="invalid-feedback" role="alert">
@@ -209,7 +203,7 @@
                     </div>      
 
                     <div class="col-md-3 mb-4">
-                        <label for="estado" class="form-label">Numero</label>
+                        <label for="estado" class="form-label">Estado<span style="color: red;">*</span></label>
                         <select id="estado" type="text" class="form-control @error('estado') is-invalid @enderror" name="estado" value="{{ old('estado') }}" required autocomplete="estado">
                             <option value="0" disabled selected>Selecione o estado</option>
                             <option value="AC">Acre</option>
@@ -261,10 +255,10 @@
                     </div>                                                                      
 
                     <div class="col-sm-6 mb-4">
-                        <label for="senha" class="form-label">Senha</label>
-                        <input id="senha" type="password" class="form-control @error('senha') is-invalid @enderror" name="senha" required autocomplete="senha">
+                        <label for="password" class="form-label">Senha<span style="color: red;">*</span></label>
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password">
 
-                        @error('senha')
+                        @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -272,8 +266,8 @@
                     </div>
 
                     <div class="col-sm-6 mb-4">
-                        <label for="confirmar_senha" class="form-label">Confirme a Senha</label>
-                        <input id="confirmar_senha" type="text" class="form-control @error('sobrenome') is-invalid @enderror" name="confirmar_senha" value="{{ old('confirmar_senha') }}" required autocomplete="confirmar_senha">
+                        <label for="password_confirmation" class="form-label">Confirme a Senha<span style="color: red;">*</span></label>
+                        <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="password_confirmation">
 
                         @error('sobrenome')
                         <span class="invalid-feedback" role="alert">

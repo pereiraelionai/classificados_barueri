@@ -16,10 +16,37 @@
         <li><a href="#" class="nav-link px-2 fonte_header"><i class="fa-solid fa-envelope"></i> Mensagens</a></li>
       </ul>
 
-      <div class="col-md-3 text-end">
-        <a href="login" class="btn btn-outline-header me-2">Login</a>
-        <a href="register" class="btn btn-header">Inscreva-se </a>
-      </div>
+    @guest
+      @if (Route::has('login'))
+        <div class="col-md-3 text-end">
+          <a href="login" class="btn btn-outline-header me-2">Login</a>
+          <a href="register" class="btn btn-header">Inscreva-se </a>
+        </div>
+      @endif
+                            
+      @else
+        <div class="col-md-3 text-end">
+          <button type="button" class="btn btn-user dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ Auth::user()->nome }}
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+                </a>
+            </li>
+          </ul>
+        </div>
+      @endguest      
       
     </header>
 
