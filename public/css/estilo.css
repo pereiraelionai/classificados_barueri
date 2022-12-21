@@ -176,5 +176,57 @@ ul li a:hover {
   }
 
   .btn-user:hover {
-    color: #44354a;;
+    color: #44354a;
+}
+
+.fundo_container {
+  background-color: #edefef;
+}
+
+.img_anuncio {
+  height: 350px;
+  padding: 15px;
+  margin-left: 15px;
+}
+
+.img_anuncio img {
+  height: 100%;
+  width: 100%;
+}
+
+.card-inner {
+  border-bottom: 1px solid #dedede;
+  height: 210px;
+}
+
+.card-title {
+  color: #632b7a;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.card-title:hover {
+  color: #632b7a;
+}
+
+.preco {
+  padding-top: 10px;;
+}
+
+.link-desc {
+  color: #632b7a;
+}
+
+.link-desc:hover {
+  color: #632b7a;
+  font-weight: bold;
+}
+
+h6 {
+  display: inline;
+}
+
+.branco {
+  color: white;
 }
