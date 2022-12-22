@@ -230,3 +230,35 @@ h6 {
 .branco {
   color: white;
 }
+
+.my-area, .my-area:hover {
+  font-family: "Abalone";
+  text-transform: uppercase;
+  color: rgb(84,64,91);
+}
+
+.busca-my-area {
+  height: 60px;
+}
+
+.btn-my-area {
+  margin-top: -15px;
+  border-color: rgb(84,64,91);
+  color: rgb(84,64,91);
+}
+
+.btn-my-area:hover {
+  background-color: rgb(84,64,91);
+  color: white;
+}
+
+.views {
+  color: rgb(84,64,91);
+  font-size: 20px;
+  margin-left: 20px;
+  margin-top: 4px;
+}
+
+.views small {
+
+}

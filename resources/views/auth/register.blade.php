@@ -18,6 +18,8 @@
         <!--JS-->
         <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
         <script src="{{ asset('js/utils.js') }}"></script>
+        <script src="{{ asset('js/registrar.js') }}"></script>
+
 
         <style>
       .bd-placeholder-img {

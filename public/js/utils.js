@@ -1,10 +1,3 @@
-$(document).ready(function(){
-    Mascara.setCPF(document.getElementById('cpf'));
-    Mascara.setCelular(document.getElementById('celular'));
-    Mascara.setCelular(document.getElementById('telefone'));
-    Mascara.setOnlyNumbers(document.getElementById('numero'));
-});
-
 Number.isNumber = function (text) {
     if (text.trim() === '' || isNaN(Number.getFloat(text).toString()) || Number.Filter(text, '.,') === '')
         return false;

@@ -17,9 +17,15 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('/anuncie', function() {
+    return view('anuncie');
+})->name('anuncie')->middleware('auth');
+
 Auth::routes();
 
-Route::get('/meus_anuncios', [App\Http\Controllers\HomeController::class, 'index'])->name('meus_anuncios');
+Route::get('/minha_area', [App\Http\Controllers\HomeController::class, 'index'])->name('minha_area');
+Route::get('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'index'])->name('anuncio_produto');
+
 
 Route::prefix('/sistema')->group(function() {
 
