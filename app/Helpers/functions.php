@@ -29,3 +29,17 @@ function validaCPF($cpf) {
     return true;
 
 }
+
+function jsonReturn (string $title, string $msg, string $status, $dados=null) {
+    
+    $result = ['status' => $status, 'title' => $title, 'status' => $status, 'dados' => $dados];
+    header('Content-Type: application/json');
+    header("HTTP/1.1 200 OK");
+    echo json_encode($result);
+
+    die();
+}
+
+function success($title, $msg, $data=null) {
+    jsonReturn($title, $msg, 'success', $data);
+}

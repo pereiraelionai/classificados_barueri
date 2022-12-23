@@ -1,25 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -71,56 +49,11 @@ body {
     -webkit-overflow-scrolling: touch;
   }
 
-  .fundo_container {
-    background-color: #edefef;
-    width: 80%;
+  .borda {
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 5px;
   }
 
-  .btn-anuncio-tipo {
-    color: rgb(84,64,91);
+  .display-6 {
+    font-size: 35px;
   }
-
-  .btn-anuncio-tipo:hover {
-    color: #632b7a;
-    border: 1px solid #632b7a;
-  }
-
-  a:hover {
-    text-decoration: none;
-  }
-
-  .logo_anuncie {
-    width: 250px;
-    margin-top: -80px;
-    margin-bottom: 20px;;
-  }
-
-  @media (min-width: 576px) { 
-    h1 {
-      font-size: 20px;
-    }
-  }
-
-@media (min-width: 768px) { 
-    h1 {
-      font-size: 20px;
-    }
- }
-
-@media (min-width: 992px) { 
-    h1 {
-      font-size: 30px;
-    }
- }
-
-@media (min-width: 1200px) { 
-  h1 {
-    font-size: 40px;
-  }
- }
-
-@media (min-width: 1400px) { 
-  h1 {
-    font-size: 40px;
-  }
- }

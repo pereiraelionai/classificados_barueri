@@ -23,32 +23,34 @@
     
     <main class="container w-100 m-auto">
 
+        <a href="{{ route('index') }}"><img src="{{ asset('img/logo_classificados.png') }}" class="logo_anuncie"></a>
+        <br><br>
         <h1 class="display-4">Escolha seu tipo de anúncio:<h1>
         <hr class="mb-5">
 
         <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-4 card-anuncio">
                 <a href="{{ route('anuncio_produto') }}">
-                    <div class="fundo_container p-5 rounded btn-anuncio-tipo">
+                    <div class="fundo_container p-5 rounded btn-anuncio-tipo mb-2">
                         <h1 class="display-5">Produtos</h1>
                         <i class="fa-solid fa-store"></i>
                     </div>
                 </a>   
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 card-anuncio">
                 <a href="#">
-                    <div class="fundo_container p-5 rounded btn-anuncio-tipo">
+                    <div class="fundo_container p-5 rounded btn-anuncio-tipo mb-2">
                         <h1 class="display-5">Serviços</h1>
                         <i class="fa-solid fa-screwdriver-wrench"></i>
                     </div>
                 </a>    
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 card-anuncio">
                 <a href="#">
-                    <div class="fundo_container p-5 rounded btn-anuncio-tipo">
+                    <div class="fundo_container p-5 rounded btn-anuncio-tipo mb-2">
                         <h1 class="display-5">Empregos</h1>
                         <i class="fa-sharp fa-solid fa-user-tie"></i>
                     </div>

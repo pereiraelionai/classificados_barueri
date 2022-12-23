@@ -186,4 +186,94 @@ let Mascara = {
                 return false;
         };
     },
+
+    setMoeda: function (obj) {
+        
+        obj.style.textAlign = 'right';
+        obj.maxLength = 15;
+
+        if(obj.value.trim() == ''){
+            obj.value = ',  ';
+        }
+
+        obj.onkeypress = function (ev) {
+            ev = window.event || ev;
+            var keyCode = ev.keyCode || ev.which;
+
+            //permite a propagação do BACKSPACE mesmo
+            //quando alcançado o tamanho máximo do texto
+            if (keyCode !== 8)
+                if (obj.value.length >= obj.maxLength)
+                    return false;
+
+            //libera as teclas BACKSPACE e TAB
+            if (keyCode === 8 || keyCode === 9)
+                return true;
+
+            if (!Number.isNumber(String.fromCharCode(keyCode)))
+                return false;
+
+            var temp = Number.Filter(obj.value) + String.fromCharCode(keyCode);
+
+            switch (temp.length)
+            {
+                case 0:
+                    obj.value = ',  ';
+                    break;
+
+                case 1:
+                    obj.value = ', ' + temp;
+                    break;
+
+                case 2:
+                    obj.value = ',' + temp;
+                    break;
+
+                default:
+                    temp = temp.substr(0, temp.length - 2) + ',' + temp.substr(temp.length - 2, temp.length - 1);
+                    obj.value = temp;
+                    break;
+            }
+
+            return false;
+        };
+
+        obj.onfocus = function () {
+            if (Number.getFloat(this.value) === 0.0)
+                this.value = ',  ';
+        }
+
+        obj.onkeydown = function (ev) {
+            ev = window.event || ev;
+            var keyCode = ev.keyCode || ev.which;
+
+            if (keyCode != 8)
+                return true;
+
+            this.value = this.value.substr(0, this.value.length - 1);
+            var temp = Number.Filter(this.value);
+
+            switch (temp.length)
+            {
+                case 0:
+                    this.value = ',  ';
+                    break;
+
+                case 1:
+                    this.value = ', ' + temp;
+                    break;
+
+                case 2:
+                    this.value = ',' + temp;
+                    break;
+
+                default:
+                    temp = temp.substr(0, temp.length - 2) + ',' + temp.substr(temp.length - 2, 2);
+                    this.value = temp;
+                    break;
+            }
+
+            return false;
+        };
+    }
 }
