@@ -259,6 +259,19 @@ h6 {
   margin-top: 4px;
 }
 
-.views small {
+.btn-anuncio {
+  border: 2px solid rgb(84,64,91);
+  border-radius: 25px;
+  font-size: 15px;
+  padding: 10px 45px;
+  font-weight: bold;
+  color: rgb(84,64,91);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+.btn-anuncio:hover {
+  text-decoration: none;
+  background-color: rgb(84,64,91);
+  color: white;
 }
