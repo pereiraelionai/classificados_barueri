@@ -20,14 +20,15 @@ class AnuncioProduto extends Controller
     }
 
     public function store(Request $request) {
+        #TODO:Select categoria não preenche os dados caso o formulário não seja validado
+        #TODO:Imagens não preenche os dados caso o formulário não seja validado
 
         $regras = [
             'titulo' => 'required|min:3|max:86',
-            'descricao' => 'required|max:257',
+            'descricao' => 'required|max:1000',
             'categoria' => 'required',
-            'valor' => 'required',
             'foto_capa' => 'required|mimes:jpg,jpeg,png',
-            'foto_1' => 'mimes:jpg,jpeg,png|size:512'
+            'foto_1' => 'mimes:jpg,jpeg,png'
         ];
 
         $msg = [
@@ -40,30 +41,25 @@ class AnuncioProduto extends Controller
 
         $request->validate($regras, $msg);
 
-        $produto = new Produto();
+        //personalizando validação para valor em branco no form
+        if($request->input('valor') == ',') {
+            $regra_valor = ['valor' => 'integer'];
+            $msg_valor = ['integer' => 'O campo valor precisa estar preenchido'];
+            $request->validate($regra_valor, $msg_valor);
+        }
 
+
+        $produto = new Produto();
         $produto->titulo = $request->input('titulo');
         $produto->descricao = $request->input('descricao');
-        $produto->categoria = $request->input('categoria');
+        $produto->categoria_id = $request->input('categoria');
         $produto->valor = $request->input('valor');
-
-        if($request->hasFile('foto_capa') && $request->file('foto_capa')->isValid()) {
-
-            $requestFoto = $request->input('foto_capa');
-            $extencao = $requestFoto->extension();
-            $fotoNome = md5($requestFoto->getClientOriginalName() . strtotime('now') . "." . $extencao);
-            $requestFoto->move(public_path('img/anuncio_produtos'), $fotoNome);
-            $produto->foto_1 = $fotoNome;
-        }
-
-        if($request->hasFile('foto_1') && $request->file('foto_1')->isValid()) {
-
-            $requestFoto = $request->input('foto_1');
-            $extencao = $requestFoto->extension();
-            $fotoNome = md5($requestFoto->getClientOriginalName() . strtotime('now') . "." . $extencao);
-            $requestFoto->move(public_path('img/anuncio_produtos'), $fotoNome);
-            $produto->foto_1 = $fotoNome;
-        }
+        
+        //função que prepara as imagens para serem salvas no banco
+        $produto->foto_1 = setImagem('foto_capa', $request);
+        $produto->foto_2 = setImagem('foto_1', $request);
+        $produto->foto_3 = setImagem('foto_2', $request);
+        $produto->foto_4 = setImagem('foto_3', $request);
 
         $produto->save();
 

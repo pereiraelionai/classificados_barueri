@@ -39,14 +39,14 @@
                     <div class="row my-4">
                         <label for="titulo" class="col-sm-2 col-form-label">Título</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control {{$errors->has('titulo') ? 'is-invalid' : ''}}" name="titulo" id="titulo">
+                            <input type="text" class="form-control {{$errors->has('titulo') ? 'is-invalid' : ''}}" name="titulo" id="titulo" value="{{old('titulo')}}">
                             <small style="color: red;">{{$errors->has('titulo') ? $errors->first('titulo') : ''}}</small>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="descricao" class="col-sm-2 col-form-label">Descrição</label>
                         <div class="col-sm-10">
-                        <textarea class="form-control {{$errors->has('descricao') ? 'is-invalid' : ''}}" rows="6" id="descricao" name="descricao"></textarea>
+                        <textarea class="form-control {{$errors->has('descricao') ? 'is-invalid' : ''}}" rows="6" id="descricao" name="descricao">{{old('descricao')}}</textarea>
                         <small style="color: red;">{{$errors->has('descricao') ? $errors->first('descricao') : ''}}</small>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         <div class="col-md-5">
                             <label for="categoria" class="form-label">Categoria</label>
                             <select class="form-control {{$errors->has('categoria') ? 'is-invalid' : ''}}" id="categoria" name="categoria">
-                                <option selected disabled >Selecione a categoria</option>
+                                <option selected disabled>Selecione a categoria</option>
                             </select>
                             <small style="color: red;">{{$errors->has('categoria') ? $errors->first('categoria') : ''}}</small>
                         </div>
@@ -64,26 +64,41 @@
                             <label for="valor" class="form-label">Valor</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">R$</span>
-                                <input type="text" class="form-control {{$errors->has('valor') ? 'is-invalid' : ''}}" id="valor" name="valor" aria-label="Amount (to the nearest dollar)">
-                                <small style="color: red;">{{$errors->has('valor') ? $errors->first('valor') : ''}}</small>
+                                <input type="text" class="form-control {{$errors->has('valor') ? 'is-invalid' : ''}}" id="valor" name="valor" value="{{old('valor')}}">
                             </div>
+                                <small style="color: red;">{{$errors->has('valor') ? $errors->first('valor') : ''}}</small>
+
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-2"></div>
                         <div class="col-md-5">
                             <label for="foto_capa" class="form-label">Foto Capa</label>
-                            <input type="file" class="form-control-file {{$errors->has('foto_capa') ? 'is-invalid' : ''}}" id="foto_capa" name="foto_capa">
+                            <input type="file" class="form-control-file {{$errors->has('foto_capa') ? 'is-invalid' : ''}}" id="foto_capa" name="foto_capa" value="{{old('foto_capa')}}">
                             <small style="color: red;">{{$errors->has('foto_capa') ? $errors->first('foto_capa') : ''}}</small>
                         </div>
                         <div class="col-md-5">
                             <label for="foto_1" class="form-label">Foto 1</label>
-                            <input type="file" class="form-control-file" id="foto_1" name="foto_1">
+                            <input type="file" class="form-control-file {{$errors->has('foto_1') ? 'is-invalid' : ''}}" id="foto_1" name="foto_1">
+                            <small style="color: red;">{{$errors->has('foto_1') ? $errors->first('foto_1') : ''}}</small>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-5">
+                            <label for="foto_2" class="form-label">Foto 2</label>
+                            <input type="file" class="form-control-file {{$errors->has('foto_2') ? 'is-invalid' : ''}}" id="foto_2" name="foto_2" value="{{old('foto_2')}}">
+                            <small style="color: red;">{{$errors->has('foto_2') ? $errors->first('foto_2') : ''}}</small>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="foto_3" class="form-label">Foto 3</label>
+                            <input type="file" class="form-control-file {{$errors->has('foto_3') ? 'is-invalid' : ''}}" id="foto_3" name="foto_3">
+                            <small style="color: red;">{{$errors->has('foto_3') ? $errors->first('foto_3') : ''}}</small>
+                        </div>
+                    </div>                    
                     <div class="row">
                         <div class="col-md-10"></div>
-                        <button class="btn btn-anuncio" type="submit">Anunciar</button>
+                        <button class="btn btn-anuncio" type="submit" onclick="AnuncioProduto.setOldCategoria()">Anunciar</button>
                     </div>
                 </form>
             </div>

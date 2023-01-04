@@ -17,13 +17,13 @@ class CreateAnuncioProdutosTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->unsignedBigInteger('categoria_id');
-            $table->float('valor', 8, 2);
+            $table->string('valor');
             $table->longText('descricao');
             $table->boolean('destaque')->default(false);
             $table->string('foto_1');
-            $table->string('foto_2');
-            $table->string('foto_3');
-            $table->string('foto_4');
+            $table->string('foto_2')->nullable();
+            $table->string('foto_3')->nullable();
+            $table->string('foto_4')->nullable();
             $table->unsignedBigInteger('tipo_anuncios_id')->default(1);
             $table->boolean('ativo')->default(true);
             $table->timestamps();

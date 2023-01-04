@@ -43,3 +43,12 @@ function jsonReturn (string $title, string $msg, string $status, $dados=null) {
 function success($title, $msg, $data=null) {
     jsonReturn($title, $msg, 'success', $data);
 }
+
+function setImagem($name, $request) {
+    $requestFoto = $request->file($name);
+    $extencao = $requestFoto->extension();
+    $fotoNome = md5($requestFoto->getClientOriginalName() . strtotime('now')) . "." . $extencao;
+    $requestFoto->move(public_path('img/anuncio_produtos'), $fotoNome);
+    
+    return $fotoNome;
+}
