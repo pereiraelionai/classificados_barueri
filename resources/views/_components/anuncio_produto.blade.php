@@ -1,4 +1,4 @@
-
+@foreach($anuncio_produtos as $produto)
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-4 img_anuncio">
@@ -7,7 +7,7 @@
         <div class="col-md-7">
             <div class="card-body">
                 <div class="card-inner">
-                    <h5><a class="card-title" href="#">Samsung Galaxy Note 10 256Gb Usado Perfeito Usado Perfeito Usado Perfeito Usado</a></h5>
+                    <h5><a class="card-title" href="#">{{ $produto->titulo }}</a></h5>
                         <p class="card-text mt-4">
                             This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
                             This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
@@ -26,7 +26,7 @@
                         <h6><span class="badge bg-info m-2 p-2 branco">Eletrônicos e Celulares</span></h6>
                     </div>
                     <div class="col-md-3">
-                        <h2><span class="badge bg-light mt-2">R$ 1.735,90</span><h2>
+                        <h2><span class="badge bg-light mt-2">R$ {{$produto->valor}}</span><h2>
                     </div>
                 </div>
                 <div class="row borda justify-content-start ml-2 mt-3">
@@ -39,3 +39,4 @@
         </div>
     </div>
 </div>
+@endforeach

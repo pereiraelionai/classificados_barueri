@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AnuncioProduto;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('minha_area');
+    {   
+        $id_user = auth()->user()->id;
+
+        $anuncios_produtos = AnuncioProduto::where('id_user', '=', $id_user)->get();
+        
+        return view('minha_area')->with('anuncio_produtos', $anuncios_produtos);
     }
 }

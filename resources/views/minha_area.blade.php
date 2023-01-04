@@ -24,7 +24,7 @@
             <h1 class="display-5" id="titulo_minha_area">Meus Anúncios</h1>
             <hr>
             <div id="meus_anuncios">
-                @include('_components.meus_anuncios')
+                @include('_components.anuncio_produto')
             </div>
 
             <div id="anuncios_inativos" style="display: none">
