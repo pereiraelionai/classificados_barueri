@@ -200,14 +200,19 @@ ul li a:hover {
 }
 
 .card-title {
-  color: #632b7a;
+  color: #1C1C1C;
   font-weight: bold;
   font-size: 20px;
   text-transform: uppercase;
 }
 
+.card-text {
+  height: 78px;
+}
+
 .card-title:hover {
   color: #632b7a;
+  text-decoration: none;
 }
 
 .preco {
@@ -274,4 +279,9 @@ h6 {
   text-decoration: none;
   background-color: rgb(84,64,91);
   color: white;
+}
+
+.icone-carousel {
+  color: black;
+  font-size: 30px;
 }

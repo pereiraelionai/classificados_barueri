@@ -54,12 +54,22 @@ class AnuncioProduto extends Controller
         $produto->descricao = $request->input('descricao');
         $produto->categoria_id = $request->input('categoria');
         $produto->valor = $request->input('valor');
+        $produto->id_user = auth()->user()->id;
         
         //função que prepara as imagens para serem salvas no banco
         $produto->foto_1 = setImagem('foto_capa', $request);
-        $produto->foto_2 = setImagem('foto_1', $request);
-        $produto->foto_3 = setImagem('foto_2', $request);
-        $produto->foto_4 = setImagem('foto_3', $request);
+        if($request->file('foto_1')) {
+            $produto->foto_2 = setImagem('foto_1', $request);
+
+        }
+        if($request->file('foto_2')) {
+            $produto->foto_2 = setImagem('foto_2', $request);
+
+        }
+        if($request->file('foto_3')) {
+            $produto->foto_2 = setImagem('foto_3', $request);
+
+        }
 
         $produto->save();
 

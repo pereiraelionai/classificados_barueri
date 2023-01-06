@@ -23,7 +23,7 @@ Route::get('/anuncie', function() {
 
 Auth::routes();
 
-Route::get('/minha_area', [App\Http\Controllers\HomeController::class, 'index'])->name('minha_area');
+Route::get('/minha_area', [App\Http\Controllers\MinhaArea::class, 'index'])->name('minha_area');
 Route::get('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'create'])->name('anuncio_produto');
 Route::post('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'store'])->name('anuncio_produto_salvar');
 Route::get('/anuncio_produto/categoria', [App\Http\Controllers\AnuncioProduto::class, 'Categorias'])->name('categorias');

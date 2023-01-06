@@ -52,3 +52,12 @@ function setImagem($name, $request) {
     
     return $fotoNome;
 }
+
+function codigoProduto($id) {
+    $chaveCript = 123;
+    $newId = $id + $chaveCript;
+    $cript = sha1($newId);
+    $cript = substr($cript, 0, 7);
+
+    return $cript;
+}
