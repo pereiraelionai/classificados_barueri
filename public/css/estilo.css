@@ -285,3 +285,7 @@ h6 {
   color: black;
   font-size: 30px;
 }
+
+.dropdown-item {
+  cursor: pointer;
+}

@@ -65,5 +65,4 @@
         </div>
     </div>
 </div>
-<!--aquiiiii-->
 @endforeach

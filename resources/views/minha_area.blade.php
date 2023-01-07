@@ -8,7 +8,16 @@
             <div class="container-fluid">
                 <a class="navbar-brand my-area"><i class="fa-solid fa-house"></i> Minha área</a>
                 <div class="row justify-content-center ml-2 mt-3">
-                    <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.meusAnuncios()" type="submit"><i class="fa-solid fa-box-archive"></i> Meus Anúncios</button>
+                    <div class="dropdown">
+                        <button class="btn btn-outline mr-2 btn-my-area dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-box-archive"></i> Categoria
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="MinhaArea.meusAnuncios('produtos')">Produtos</a></li>
+                            <li><a class="dropdown-item" onclick="MinhaArea.meusAnuncios('empregos')">Empregos</a></li>
+                            <li><a class="dropdown-item" onclick="MinhaArea.meusAnuncios('servicos')">Serviços</a></li>
+                        </ul>
+                    </div>
                     <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.anunciosInativos()" type="submit"><i class="fa-sharp fa-solid fa-trash"></i> Anúncios Inátivos</button>
                     <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.favoritos()" type="submit"><i class="fa-solid fa-heart"></i>Anúncios Favoritos</button>
                     <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.mensagens()" type="submit"><i class="fa-solid fa-envelope"></i> Mensagens</button>
@@ -21,10 +30,18 @@
 
 
         <div class="fundo_container p-5 rounded">
-            <h1 class="display-5" id="titulo_minha_area">Meus Anúncios</h1>
+            <h1 class="display-5" id="titulo_minha_area">Meus Anúncios (Produtos)</h1>
             <hr>
-            <div id="meus_anuncios">
+            <div id="meus_anuncios_produtos">
                 @include('_components.anuncio_produto')
+            </div>
+
+            <div id="meus_anuncios_empregos" style="display: none">
+                @include('_components.anuncio_empregos')
+            </div>
+
+            <div id="meus_anuncios_servicos" style="display: none">
+                Serviços
             </div>
 
             <div id="anuncios_inativos" style="display: none">

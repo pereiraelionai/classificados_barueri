@@ -117,8 +117,8 @@
   
               <div class="card-body">
                 <a href="#"><p class="card-text">Samsung Galaxy Note 10 256Gb Usado Perfeito Usado Perfeito Usado Perfeito Usado</p></a>
-                <div class="d-flex justify-content-between align-items-center">
-                  <strong class="text-muted mt-3">R$ 1.730,00</strong>
+                <div class="d-flex justify-content-between align-items-cente">
+                  <strong class="text-muted">R$ 1.730,00</strong>
                 </div>
               </div>
             </div>
