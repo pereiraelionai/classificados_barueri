@@ -144,7 +144,7 @@ ul li a:hover {
   }
 
   .card {
-    height: 350px;
+    height: 380px;
   }
 
   footer {
@@ -288,4 +288,39 @@ h6 {
 
 .dropdown-item {
   cursor: pointer;
+}
+
+.btn-card {
+  width: 50px;
+  color: rgb(84,64,91);
+  border-color: rgb(84,64,91);
+}
+
+.btn-card:hover {
+  color: white;
+  border-color: rgb(84,64,91);
+  background-color: rgb(84, 64, 91);
+}
+
+.text-card {
+  color: rgb(84,64,91);
+}
+
+.text-card:hover {
+  color: rgb(84,64,91);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.foto-card {
+  height: 225px;
+  width: 250px;
+  margin: 10px 10px 0px 55px;
+}
+
+.no-anuncio {
+  color: rgb(84,64,91);
+  font-weight: bold;
+  text-align: center;
+  padding: 50px 0px;
 }

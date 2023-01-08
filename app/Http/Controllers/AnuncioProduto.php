@@ -24,7 +24,7 @@ class AnuncioProduto extends Controller
         #TODO:Imagens não preenche os dados caso o formulário não seja validado
 
         $regras = [
-            'titulo' => 'required|min:3|max:86',
+            'titulo' => 'required|min:3|max:79',
             'descricao' => 'required|max:1000',
             'categoria' => 'required',
             'foto_capa' => 'required|mimes:jpg,jpeg,png',
@@ -35,7 +35,6 @@ class AnuncioProduto extends Controller
             'required' => 'O campo :attribute precisa ser preenchido',
             'min' => 'O título deve conter no mínimo 3 caracteres',
             'titulo.max' => 'O título deve conter no máximo 86 caracteres',
-            'descricao.max' => 'A descrição deve conter no máximo 257 caracteres',
             'mimes' => 'A foto deve ser um arquivo do tipo JPG, JPEG ou PNG',
         ];
 
@@ -55,6 +54,7 @@ class AnuncioProduto extends Controller
         $produto->categoria_id = $request->input('categoria');
         $produto->valor = $request->input('valor');
         $produto->id_user = auth()->user()->id;
+        $produto->exibir_contato = $request->input('exibir_contato') == 'on' ? 1 : 0;
         
         //função que prepara as imagens para serem salvas no banco
         $produto->foto_1 = setImagem('foto_capa', $request);
@@ -63,11 +63,11 @@ class AnuncioProduto extends Controller
 
         }
         if($request->file('foto_2')) {
-            $produto->foto_2 = setImagem('foto_2', $request);
+            $produto->foto_3 = setImagem('foto_2', $request);
 
         }
         if($request->file('foto_3')) {
-            $produto->foto_2 = setImagem('foto_3', $request);
+            $produto->foto_4 = setImagem('foto_3', $request);
 
         }
 

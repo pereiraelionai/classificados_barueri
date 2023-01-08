@@ -26,7 +26,7 @@ class MinhaArea extends Controller
     {   
         $id_user = auth()->user()->id;
         
-        $anuncios_produtos = AnuncioProduto::where('id_user', '=', $id_user)
+        $anuncios_produtos = AnuncioProduto::where('id_user', '=', $id_user)->where('ativo', '=', 1)
                             ->leftjoin('categorias', 'categoria_id', '=', 'categorias.id')
                             ->leftjoin('tipo_anuncios', 'tipo_anuncios_id', '=', 'tipo_anuncios.id')
                             ->select('anuncio_produtos.*', 'categorias.nome_categoria', 'tipo_anuncios.tipo')

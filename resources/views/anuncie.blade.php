@@ -40,6 +40,15 @@
             </div>
 
             <div class="col-md-4 card-anuncio">
+                <a href="{{ route('anuncio_emprego') }}">
+                    <div class="fundo_container p-5 rounded btn-anuncio-tipo mb-2">
+                        <h1 class="display-5">Empregos</h1>
+                        <i class="fa-sharp fa-solid fa-user-tie"></i>
+                    </div>
+                </a>    
+            </div>    
+
+            <div class="col-md-4 card-anuncio">
                 <a href="#">
                     <div class="fundo_container p-5 rounded btn-anuncio-tipo mb-2">
                         <h1 class="display-5">Serviços</h1>
@@ -47,15 +56,6 @@
                     </div>
                 </a>    
             </div>
-
-            <div class="col-md-4 card-anuncio">
-                <a href="#">
-                    <div class="fundo_container p-5 rounded btn-anuncio-tipo mb-2">
-                        <h1 class="display-5">Empregos</h1>
-                        <i class="fa-sharp fa-solid fa-user-tie"></i>
-                    </div>
-                </a>    
-            </div>    
 
         </div>       
 

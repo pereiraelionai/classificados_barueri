@@ -58,6 +58,9 @@
                 {{ __('Esqueceu a senha?') }}
             </a>
         @endif
+            <a class="btn btn-link" style="color: rgb(84, 64, 91);" href="{{ route('register') }}">
+                {{ __('Não possui login? Inscreva-se') }}
+            </a>
         <p class="mt-5 mb-3 text-muted"><span>&copy; Classificados Barueri. Todos os direitos reservados.</span></p>
     </form>
     </main>

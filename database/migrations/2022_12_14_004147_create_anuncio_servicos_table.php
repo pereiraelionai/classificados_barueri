@@ -17,7 +17,7 @@ class CreateAnuncioServicosTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->unsignedBigInteger('categoria_id')->default(1);
-            $table->float('valor', 8, 2);
+            $table->string('valor');
             $table->boolean('por_hora');
             $table->longText('descricao');
             $table->boolean('destaque')->default(false);

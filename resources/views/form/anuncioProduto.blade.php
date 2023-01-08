@@ -13,7 +13,7 @@
         
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/form-produto.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/form.css') }}" rel="stylesheet">
         <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
 
         <!--JS-->
@@ -95,10 +95,22 @@
                             <input type="file" class="form-control-file {{$errors->has('foto_3') ? 'is-invalid' : ''}}" id="foto_3" name="foto_3">
                             <small style="color: red;">{{$errors->has('foto_3') ? $errors->first('foto_3') : ''}}</small>
                         </div>
-                    </div>                    
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4 ml-4">
+                        <br><br>
+                            <input class="form-check-input" type="checkbox" id="exibir_contato" name="exibir_contato">
+                            <label class="form-check-label" for="combinar">
+                                Exibir meus dados de contato no anúncio
+                            </label>
+                        </div>
+                    </div> 
+
                     <div class="row">
                         <div class="col-md-10"></div>
-                        <button class="btn btn-anuncio" type="submit" onclick="AnuncioProduto.setOldCategoria()">Anunciar</button>
+                        <button class="btn btn-anuncio" type="submit">Anunciar</button>
                     </div>
                 </form>
             </div>

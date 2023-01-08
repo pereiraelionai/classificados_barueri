@@ -1,34 +1,39 @@
+@if($anuncio_produtos->count() == 0)
+    <h2 class="no-anuncio">Você não possui anúncios ainda :-(</h2>
+@endif
 @foreach($anuncio_produtos as $produto)
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-4 img_anuncio">
             <div id="carouselAnuncio{{ $produto->id }}" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="img/anuncio_produtos/{{ $produto->foto_1 }}" class="img-fluid rounded-start" style="height: 310px;">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="img/anuncio_produtos/{{ $produto->foto_1 }}" class="img-fluid rounded-start" style="height: 310px;">
+                    </div>
+                    @if($produto->foto_2)
+                    <div class="carousel-item">
+                        <img src="img/anuncio_produtos/{{ $produto->foto_2 }}" class="img-fluid rounded-start" style="height: 310px;">
+                    </div>
+                    @endif
+                    @if($produto->foto_3)
+                    <div class="carousel-item">
+                        <img src="img/anuncio_produtos/{{ $produto->foto_3 }}" class="img-fluid rounded-start" style="height: 310px;">
+                    </div>
+                    @endif
+                    @if($produto->foto_4)
+                    <div class="carousel-item">
+                        <img src="img/anuncio_produtos/{{ $produto->foto_4 }}" class="img-fluid rounded-start" style="height: 310px;">
+                    </div>
+                    @endif                
                 </div>
                 @if($produto->foto_2)
-                <div class="carousel-item">
-                    <img src="img/anuncio_produtos/{{ $produto->foto_2 }}" class="img-fluid rounded-start" style="height: 310px;">
-                </div>
+                <button class="carousel-control-prev" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="prev">
+                    <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-circle-left"></i></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="next">
+                    <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-circle-right"></i></span>
+                </button>
                 @endif
-                @if($produto->foto_3)
-                <div class="carousel-item">
-                    <img src="img/anuncio_produtos/{{ $produto->foto_3 }}" class="img-fluid rounded-start" style="height: 310px;">
-                </div>
-                @endif
-                @if($produto->foto_4)
-                <div class="carousel-item">
-                    <img src="img/anuncio_produtos/{{ $produto->foto_4 }}" class="img-fluid rounded-start" style="height: 310px;">
-                </div>
-                @endif                
-            </div>
-            <button class="carousel-control-prev" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="prev">
-                <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-circle-left"></i></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="next">
-                <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-circle-right"></i></span>
-            </button>
             </div>            
         </div>
         <div class="col-md-7">

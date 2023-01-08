@@ -21,14 +21,14 @@ class CreateAnuncioEmpregosTable extends Migration
             $table->longText('descricao');
             $table->string('cidade');
             $table->char('estado', 2);
-            $table->float('salario', 8, 2);
-            $table->boolean('por_hora');
+            $table->string('salario')->nullable();
+            $table->boolean('a_combinar')->default(0);
             $table->string('nome_empresa')->default('Confidencial');
             $table->integer('qtd_vagas');
             $table->date('data_inicio');
             $table->unsignedBigInteger('tipo_anuncios_id')->default(3);
             $table->boolean('ativo')->default(true);
-            $table->timestamps();   
+            $table->timestamps();
         });
     }
 
