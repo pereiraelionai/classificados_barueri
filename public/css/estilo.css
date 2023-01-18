@@ -147,6 +147,10 @@ ul li a:hover {
     height: 380px;
   }
 
+  .card_emprego {
+    height: 300px;
+  }
+
   footer {
     color: rgb(84, 64, 91);
   }
@@ -262,6 +266,39 @@ h6 {
   font-size: 20px;
   margin-left: 20px;
   margin-top: 4px;
+}
+
+.div_view {
+  margin-left: -70px;;
+}
+
+.div_preco {
+  margin-left: 30px;
+}
+
+.card_emp_direito {
+  height: 260px;
+  background-color: #edefef;
+  margin: 17px;
+}
+
+.fa-hotel, .fa-map, .fa-pen-nib, .fa-calendar {
+  font-size: 35px;
+  margin: 15px;
+  color: rgb(84,64,91);
+}
+
+.fa-map, .fa-pen-nib, .fa-calendar {
+  font-size: 28px;
+}
+
+.title-emp {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.content-emp {
+  font-size: 15px;
 }
 
 .btn-anuncio {

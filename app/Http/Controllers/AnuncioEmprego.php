@@ -37,7 +37,7 @@ class AnuncioEmprego extends Controller
     public function store(Request $request)
     {
         $regras = [
-            'titulo' => 'required|min:3|max:79',
+            'titulo' => 'required|min:3|max:51',
             'descricao' => 'required|max:1000',
             'regime' => 'required',
             'cidade' => 'required|min:3|max:18',

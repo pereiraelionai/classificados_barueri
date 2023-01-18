@@ -23,7 +23,7 @@ class CreateAnuncioEmpregosTable extends Migration
             $table->char('estado', 2);
             $table->string('salario')->nullable();
             $table->boolean('a_combinar')->default(0);
-            $table->string('nome_empresa')->default('Confidencial');
+            $table->string('nome_empresa')->default('Empresa Confidencial');
             $table->integer('qtd_vagas');
             $table->date('data_inicio');
             $table->unsignedBigInteger('tipo_anuncios_id')->default(3);
