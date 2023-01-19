@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AnuncioServico as Servico;
 
 class AnuncioServico extends Controller
 {
@@ -23,7 +24,7 @@ class AnuncioServico extends Controller
      */
     public function create()
     {
-        //
+        return view('form.anuncioServicos');
     }
 
     /**
@@ -34,7 +35,32 @@ class AnuncioServico extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'titulo' => 'required|min:3|max:79',
+            'descricao' => 'required|max:2500',
+            'valor' => 'required',
+        ];
+
+        $msg = [
+            'required' => 'O campo :attribute precisa ser preenchido',
+            'min' => 'O título deve conter no mínimo 3 caracteres',
+            'titulo.max' => 'O título deve conter no máximo 86 caracteres',
+            'descricao.max' => 'A descrição deve ter no máximo 2500 caracteres'
+        ];
+
+        $request->validate($regras, $msg);
+
+        $servico = new Servico();
+        $servico->id_user = auth()->user()->id;
+        $servico->titulo = $request->input('titulo');
+        $servico->descricao = $request->input('descricao');
+        $servico->valor = $request->input('valor');
+        $servico->por_hora = $request->input('por_hora') == 'on' ? 1 : 0;
+        $servico->exibir_contato = $request->input('exibir_contato') == 'on' ? 1 : 0;
+
+        $servico->save();
+
+        return redirect()->route('minha_area');
     }
 
     /**

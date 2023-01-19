@@ -78,6 +78,17 @@ let MinhaArea = {
 
     dadosAnuncioServicos: function(dados) {
 
+        var dadosServicos = '';
+        for(var i = 0; i < dados.length; i++) {
+            dadosServicos += HTML.anuncio_servico(
+                dados[i].titulo,
+                dados[i].descricao,
+                dados[i].por_hora,
+                dados[i].valor
+            );
+        }
+
+        document.getElementById('result_servico').innerHTML = dadosServicos;
     },
 
     anunciosInativos: function() {
@@ -205,5 +216,33 @@ let HTML = {
                                             '</div>' +
                                         '</div>' +
                                     '</div>';
+    },
+
+    anuncio_servico: function(titulo, descricao, por_hora, valor) {
+
+        //limitando 293 caracteres na descrição
+        descricao_350 = descricao.slice(0, 350) + '...';
+
+        //lógica por hora
+        
+        if(por_hora) {
+            tag_porHora = '<h6><span class="badge bg-info m-2 p-2 branco tag_por_hora">Por Hora</span></h6>';
+            css_porHora = 'mt-neg';
+        } else {
+            tag_porHora ='';
+            css_porHora = 'mt-2';
+        }
+
+        return html_anuncio_servico = '<div class="card card_servico mb-1">' +
+                                            '<div class="card-body">' +
+                                            '<h5 class="card-title" style="cursor: default;">' + titulo + '</h5>' +
+                                            '<p class="card-text">' + descricao_350 + '</p>' +
+                                                '<span class="valor_servico">Valor: R$ ' + valor + tag_porHora +' </span><br>' +
+                                            '<button class="btn btn-outline-danger ' + css_porHora + '" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>' +
+                                            '</div>' +
+                                                '<div class="views view_servico">' +
+                                                    '<i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>' +
+                                            '</div>' +
+                                        '</div>';
     }
 }

@@ -38,7 +38,7 @@ class AnuncioEmprego extends Controller
     {
         $regras = [
             'titulo' => 'required|min:3|max:51',
-            'descricao' => 'required|max:1000',
+            'descricao' => 'required|max:2500',
             'regime' => 'required',
             'cidade' => 'required|min:3|max:18',
             'estado' => 'required',
@@ -52,6 +52,7 @@ class AnuncioEmprego extends Controller
             'titulo.max' => 'O título deve conter no máximo 86 caracteres',
             'cidade.min' => 'A cidade deve conter no mínimo 3 caracteres',
             'cidade.max' => 'A cidade deve conter no máximo 18 caracteres',
+            'descricao.max' => 'A descrição deve ter no máximo 2500 caracteres'
         ];
 
         $request->validate($regras, $msg);

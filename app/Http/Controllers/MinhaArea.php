@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AnuncioProduto;
 use App\Models\AnuncioEmprego;
+use App\Models\AnuncioServico;
 
 class MinhaArea extends Controller
 {
@@ -46,5 +47,15 @@ class MinhaArea extends Controller
                             ->orderByRaw('anuncio_empregos.id DESC')->get();
 
         success('Anuncio Empregos', 'Lista de anuncio de empregos para a minha area', $anuncio_empregos);
+    }
+
+    public function AnuncioServicos() {
+
+        $id_user = auth()->user()->id;
+
+        $anuncio_servicos = AnuncioServico::where('id_user', '=', $id_user)->where('ativo', '=', 1)
+                            ->orderByRaw('anuncio_servicos.id DESC')->get();
+
+        success('Anuncio Empregos', 'Lista de anuncio de empregos para a minha area', $anuncio_servicos);
     }
 }

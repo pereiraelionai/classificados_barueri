@@ -51,6 +51,7 @@ let AnuncioEmprego = {
 
         if(checkbox) {
             salario.disabled = true;
+            salario.value = '0,00';
         } else {
             salario.disabled = false;
         }

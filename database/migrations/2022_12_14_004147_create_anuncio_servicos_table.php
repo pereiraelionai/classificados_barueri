@@ -16,7 +16,7 @@ class CreateAnuncioServicosTable extends Migration
         Schema::create('anuncio_servicos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->unsignedBigInteger('categoria_id')->default(1);
+            $table->unsignedBigInteger('categoria_id')->default(8);
             $table->string('valor');
             $table->boolean('por_hora');
             $table->longText('descricao');

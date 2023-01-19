@@ -41,7 +41,7 @@
             </div>
 
             <div id="meus_anuncios_servicos" style="display: none">
-                Serviços
+                @include('_components.anuncio_servicos')
             </div>
 
             <div id="anuncios_inativos" style="display: none">

@@ -49,7 +49,7 @@
             </div>    
 
             <div class="col-md-4 card-anuncio">
-                <a href="#">
+                <a href="{{ route('anuncio_servico') }}">
                     <div class="fundo_container p-5 rounded btn-anuncio-tipo mb-2">
                         <h1 class="display-5">Serviços</h1>
                         <i class="fa-solid fa-screwdriver-wrench"></i>

@@ -151,6 +151,15 @@ ul li a:hover {
     height: 300px;
   }
 
+  .card_servico {
+    height: 260px;
+  }
+
+  .valor_servico {
+    display: block;
+    font-weight: bold;
+  }
+
   footer {
     color: rgb(84, 64, 91);
   }
@@ -268,6 +277,16 @@ h6 {
   margin-top: 4px;
 }
 
+.view_servico {
+  margin: auto;
+  margin-left: 130px;
+  padding-bottom: 15px;;
+}
+
+.mt-neg {
+  margin-top: -10px;
+}
+
 .div_view {
   margin-left: -70px;;
 }
@@ -360,4 +379,8 @@ h6 {
   font-weight: bold;
   text-align: center;
   padding: 50px 0px;
+}
+
+.bordas {
+  border: 1px solid red;
 }

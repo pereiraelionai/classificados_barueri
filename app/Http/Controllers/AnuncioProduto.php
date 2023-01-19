@@ -25,7 +25,7 @@ class AnuncioProduto extends Controller
 
         $regras = [
             'titulo' => 'required|min:3|max:79',
-            'descricao' => 'required|max:1000',
+            'descricao' => 'required|max:2500',
             'categoria' => 'required',
             'foto_capa' => 'required|mimes:jpg,jpeg,png',
             'foto_1' => 'mimes:jpg,jpeg,png'
@@ -36,6 +36,7 @@ class AnuncioProduto extends Controller
             'min' => 'O título deve conter no mínimo 3 caracteres',
             'titulo.max' => 'O título deve conter no máximo 86 caracteres',
             'mimes' => 'A foto deve ser um arquivo do tipo JPG, JPEG ou PNG',
+            'descricao.max' => 'A descrição deve ter no máximo 2500 caracteres'
         ];
 
         $request->validate($regras, $msg);
