@@ -58,37 +58,48 @@ let MinhaArea = {
     dadosAnuncioEmprego: function(dados) {
 
         var dadosEmpregos = '';
-        for(var i = 0; i < dados.length; i++) {
-            dadosEmpregos += HTML.anuncio_emprego(
-                dados[i].titulo, 
-                dados[i].descricao, 
-                dados[i].nome_regime, 
-                dados[i].salario,
-                dados[i].a_combinar,
-                dados[i].nome_empresa, 
-                dados[i].cidade, 
-                dados[i].estado,
-                dados[i].qtd_vagas,
-                dados[i].data_inicio,
-                dados[i].created_at
-            );
+        if(dados.length > 0) {
+            for(var i = 0; i < dados.length; i++) {
+                dadosEmpregos += HTML.anuncio_emprego(
+                    dados[i].titulo, 
+                    dados[i].descricao, 
+                    dados[i].nome_regime, 
+                    dados[i].salario,
+                    dados[i].a_combinar,
+                    dados[i].nome_empresa, 
+                    dados[i].cidade, 
+                    dados[i].estado,
+                    dados[i].qtd_vagas,
+                    dados[i].data_inicio,
+                    dados[i].created_at
+                );
+            }
+            document.getElementById('result_emprego').innerHTML = dadosEmpregos;
+        } else {
+            document.getElementById('result_emprego').innerHTML = HTML.sem_anuncio();
         }
-        document.getElementById('result_emprego').innerHTML = dadosEmpregos;
+
     },
 
     dadosAnuncioServicos: function(dados) {
 
         var dadosServicos = '';
-        for(var i = 0; i < dados.length; i++) {
-            dadosServicos += HTML.anuncio_servico(
-                dados[i].titulo,
-                dados[i].descricao,
-                dados[i].por_hora,
-                dados[i].valor
-            );
+        if(dados.length > 0) {
+            for(var i = 0; i < dados.length; i++) {
+                dadosServicos += HTML.anuncio_servico(
+                    dados[i].titulo,
+                    dados[i].descricao,
+                    dados[i].por_hora,
+                    dados[i].valor
+                );
+            }
+
+            document.getElementById('result_servico').innerHTML = dadosServicos;
+
+        } else {
+            document.getElementById('result_servico').innerHTML = HTML.sem_anuncio();
         }
 
-        document.getElementById('result_servico').innerHTML = dadosServicos;
     },
 
     anunciosInativos: function() {
@@ -244,5 +255,9 @@ let HTML = {
                                                     '<i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>' +
                                             '</div>' +
                                         '</div>';
+    },
+
+    sem_anuncio: function() {
+        return html_sem_anuncio = '<h2 class="no-anuncio">Você não possui anúncios ainda :-(</h2>';
     }
 }

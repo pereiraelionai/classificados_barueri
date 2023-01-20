@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('/anuncios_filtro/{filtro}', [App\Http\Controllers\HomeController::class, 'anuncioFiltro'])->name('anuncios_filtro');
+Route::get('/anuncio_search', [App\Http\Controllers\HomeController::class, 'anuncioSearch'])->name('anuncios_search');
+
 
 Route::get('/anuncie', function() {
     return view('anuncie');
@@ -35,6 +38,7 @@ Route::post('/anuncio_emprego', [App\Http\Controllers\AnuncioEmprego::class, 'st
 Route::get('/anuncio_servico', [App\Http\Controllers\AnuncioServico::class, 'create'])->name('anuncio_servico');
 Route::post('/anuncio_servico', [App\Http\Controllers\AnuncioServico::class, 'store'])->name('anuncio_servico_salvar');
 
+//rotas para Ajax
 Route::get('/anuncio_produto/categoria', [App\Http\Controllers\AnuncioProduto::class, 'Categorias'])->name('categorias');
 Route::get('/anuncio_emprego/regime', [App\Http\Controllers\AnuncioEmprego::class, 'Regimes'])->name('regimes');
 

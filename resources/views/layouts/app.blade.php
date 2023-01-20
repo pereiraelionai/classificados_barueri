@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/utils.js') }}"></script>
         <script src="{{ asset('js/sistema.js') }}"></script>
 
@@ -26,15 +26,6 @@
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/bb3315e9fa.js" crossorigin="anonymous"></script>
-
-        <style type="text/css">
-
-        @font-face {
-            font-family: "Abalone";
-            src: url("fonte/AbaloneSmile.woff2");
-        }
-
-    </style>
 
 </head>
 <body>

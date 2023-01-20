@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Abalone";
+  src: url("../fonte/AbaloneSmile.woff2");
+}
+
 .fundo{
     background-color: #67ad5a;
 }
@@ -60,6 +65,8 @@
     color: rgb(84, 64, 91);
     margin-left: 10px;
     margin-top: 5px;
+    border: none;
+    background-color: #67ad5a;
 }
 
 .lupa:hover {
@@ -383,4 +390,8 @@ h6 {
 
 .bordas {
   border: 1px solid red;
+}
+
+.titulo_filtro {
+  color:rgb(84, 64, 91);
 }
