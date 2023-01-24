@@ -76,7 +76,7 @@
         <div class="container">
             <nav class="navbar fundo_container my-4 p-4 sticky-top">
                 <div class="container-fluid">
-                    <h3 class="titulo_filtro"><i class="fa-solid fa-filter"></i> Filtro: {{ $categoria[0]->nome_categoria }} - {{$qtd_anuncios}} anúncio(s)</h3>
+                    <h3 class="titulo_filtro"><i class="fa-solid fa-filter"></i> Filtro: Empregos - {{$qtd_anuncios}} anúncio(s)</h3>
                 </div>
             </nav>
         </div>
@@ -84,54 +84,28 @@
     <div class="album py-4 bg-light">
       <div class="container">
   
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1">
           
-          @foreach($anuncio_filtrado as $produto)
-          <div class="col mb-3">
-            <div class="card shadow-sm">
-              <div id="carouselAnuncio{{ $produto->id }}" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_1 }}" class="foto-card"></a>
-                    </div>
-                    @if($produto->foto_2)
-                    <div class="carousel-item">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_2 }}" class="foto-card"></a>
-                    </div>
+          @foreach($servicos as $servico)
+            <div class="card card_servico mb-1">
+                <div class="card-body">
+                    <h5 class="card-title"><a a class="card-title" href="#">{{ $servico->titulo }}</a></h5>
+                    <p class="card-text">{{ substr($servico->descricao, 0, 350) }}</p>
+                    <span class="valor_servico">Valor: R$ {{ $servico->valor }}
+                        @if($servico->por_hora)
+                            <h6><span class="badge bg-info m-2 p-2 branco tag_por_hora">Por Hora</span></h6>
+                        @endif
+                    </span><br>
+                    @if($servico->por_hora)
+                        <button class="btn btn-outline-danger mt-neg" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
+                    @else
+                        <button class="btn btn-outline-danger mt-2" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
                     @endif
-                    @if($produto->foto_3)
-                    <div class="carousel-item">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_3 }}" class="foto-card"></a>
-                    </div>
-                    @endif
-                    @if($produto->foto_4)
-                    <div class="carousel-item">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_4 }}" class="foto-card"></a>
-                    </div>
-                    @endif                
                 </div>
-                @isset($produto->foto_2)
-                <button class="carousel-control-prev" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="prev">
-                    <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="next">
-                    <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
-                </button>
-                @endisset
-              </div> 
-
-              <div class="card-body">
-                <a href="#" class="text-card"><p class="card-text">{{ $produto->titulo }}</p></a>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <strong class="text-muted">R$ {{ $produto->valor }}</strong>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline btn-card"><i class="fa-regular fa-heart"></i></button>
-                      <button type="button" class="btn btn-sm btn-outline btn-card"><i class="fa-regular fa-envelope"></i></button>
-                    </div>
+                <div class="views view_servico">
+                    <i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>
                 </div>
-              </div>
             </div>
-          </div>
           @endforeach
 
         </div>
@@ -139,7 +113,7 @@
     </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
+    <div class="mt-5"> </div>
   @extends('layouts.footer')
 
 @endsection

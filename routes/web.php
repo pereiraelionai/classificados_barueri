@@ -17,6 +17,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 Route::get('/anuncios_filtro/{filtro}', [App\Http\Controllers\HomeController::class, 'anuncioFiltro'])->name('anuncios_filtro');
 Route::get('/anuncio_search', [App\Http\Controllers\HomeController::class, 'anuncioSearch'])->name('anuncios_search');
 
+Route::get('/anuncio_empregos/only', [App\Http\Controllers\HomeController::class, 'empregosOnly'])->name('empregosOnly');
+Route::get('/anuncio_servicos/only', [App\Http\Controllers\HomeController::class, 'servicosOnly'])->name('servicosOnly');
+
 
 Route::get('/anuncie', function() {
     return view('anuncie');

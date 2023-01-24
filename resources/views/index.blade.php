@@ -49,7 +49,9 @@
       @endguest      
       
     </header>
-
+    <!--
+    #TODO: Criar um component para esse trecho de código
+    -->
     <div class="d-flex flex-column fundo sub-header">
         <div class="col borda align-self-start">
           <form method="GET" action="{{ route('anuncios_search') }}">
@@ -59,7 +61,6 @@
             </div>
           </form>
         </div>
-
         <div class="navbar navbar-expand-sm d-flex justify-content-center mt-3 mb-3">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('anuncios_filtro', ['filtro' => 1]) }}">Auto e Peças</a></li>
@@ -70,8 +71,8 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('anuncios_filtro', ['filtro' => 6]) }}">Imóveis</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('anuncios_filtro', ['filtro' => 7]) }}">Moda</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('anuncios_filtro', ['filtro' => 8]) }}">Outros</a></li>
-                <li class="nav-item"><a class="nav-link tag" href="#"><i class="fa-solid fa-user-tie"></i></i> Empregos</a></li>
-                <li class="nav-item"><a class="nav-link tag" href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a></li>
+                <li class="nav-item"><a class="nav-link tag" href="{{ route('empregosOnly') }}"><i class="fa-solid fa-user-tie"></i></i> Empregos</a></li>
+                <li class="nav-item"><a class="nav-link tag" href="{{ route('servicosOnly') }}"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a></li>
             </ul>
         </div>
     </div>

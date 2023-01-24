@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AnuncioProduto;
 use App\Models\Categoria;
+use App\Models\AnuncioEmprego;
+use App\Models\AnuncioServico;
 
 class HomeController extends Controller
 {
@@ -20,7 +22,7 @@ class HomeController extends Controller
 
         return view('index')->with('anuncio_produtos', $anuncios_produtos);
     }
-
+    #TODO:Criar paginação para os anuncios
     public function anuncioFiltro($filtro) {
 
         $anuncio_filtrado = [];
@@ -53,5 +55,33 @@ class HomeController extends Controller
         $qtd_anuncios = AnuncioProduto::where('ativo', '=', 1)->where('titulo', 'like', '%'.$pesquisa.'%')->count();
 
         return view('anuncio_search')->with('anuncio_search', $anuncio_search)->with('qtd_anuncios', $qtd_anuncios);
+    }
+
+    public function empregosOnly() {
+
+        $empregos = AnuncioEmprego::where('ativo', '=', 1)
+        ->leftjoin('categorias', 'categoria_id', '=', 'categorias.id')
+        ->leftjoin('tipo_anuncios', 'tipo_anuncios_id', '=', 'tipo_anuncios.id')
+        ->select('anuncio_empregos.*', 'categorias.nome_categoria', 'tipo_anuncios.tipo')
+        ->orderByRaw('anuncio_empregos.id DESC')->get();
+
+        $qtd_anuncios = AnuncioEmprego::where('ativo', '=', 1)->count();
+
+
+        return view('anuncio_empregosOnly')->with('empregos', $empregos)->with('qtd_anuncios', $qtd_anuncios);
+    }
+
+    public function servicosOnly() {
+
+        $servicos = AnuncioServico::where('ativo', '=', 1)
+        ->leftjoin('categorias', 'categoria_id', '=', 'categorias.id')
+        ->leftjoin('tipo_anuncios', 'tipo_anuncios_id', '=', 'tipo_anuncios.id')
+        ->select('anuncio_servicos.*', 'categorias.nome_categoria', 'tipo_anuncios.tipo')
+        ->orderByRaw('anuncio_servicos.id DESC')->get();
+
+        $qtd_anuncios = AnuncioServico::where('ativo', '=', 1)->count();
+
+
+        return view('anuncio_servicosOnly')->with('servicos', $servicos)->with('qtd_anuncios', $qtd_anuncios);
     }
 }

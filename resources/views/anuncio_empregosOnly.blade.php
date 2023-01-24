@@ -76,7 +76,7 @@
         <div class="container">
             <nav class="navbar fundo_container my-4 p-4 sticky-top">
                 <div class="container-fluid">
-                    <h3 class="titulo_filtro"><i class="fa-solid fa-filter"></i> Filtro: {{ $categoria[0]->nome_categoria }} - {{$qtd_anuncios}} anúncio(s)</h3>
+                    <h3 class="titulo_filtro"><i class="fa-solid fa-filter"></i> Filtro: Empregos - {{$qtd_anuncios}} anúncio(s)</h3>
                 </div>
             </nav>
         </div>
@@ -84,54 +84,75 @@
     <div class="album py-4 bg-light">
       <div class="container">
   
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1">
           
-          @foreach($anuncio_filtrado as $produto)
-          <div class="col mb-3">
-            <div class="card shadow-sm">
-              <div id="carouselAnuncio{{ $produto->id }}" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_1 }}" class="foto-card"></a>
-                    </div>
-                    @if($produto->foto_2)
-                    <div class="carousel-item">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_2 }}" class="foto-card"></a>
-                    </div>
-                    @endif
-                    @if($produto->foto_3)
-                    <div class="carousel-item">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_3 }}" class="foto-card"></a>
-                    </div>
-                    @endif
-                    @if($produto->foto_4)
-                    <div class="carousel-item">
-                        <a href="#"><img src="http://127.0.0.1:8000/img/anuncio_produtos/{{ $produto->foto_4 }}" class="foto-card"></a>
-                    </div>
-                    @endif                
-                </div>
-                @isset($produto->foto_2)
-                <button class="carousel-control-prev" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="prev">
-                    <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-target="#carouselAnuncio{{ $produto->id }}" data-slide="next">
-                    <span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
-                </button>
-                @endisset
-              </div> 
+          @foreach($empregos as $emprego)
+            <div class="card card_emprego mb-3 m-emprego">
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-inner">
+                                <h5><a class="card-title" href="#">{{ $emprego->titulo }}</a></h5>
+                                    <p class="card-text mt-4">
+                                        {{ substr($emprego->descricao, 0, 293) }}...
+                                    </p>
+                                    <div class="row borda justify-content-end pr-4">
+                                        <a class="link-desc" href="#">Ver descrição completa</a>
+                                    </div>
 
-              <div class="card-body">
-                <a href="#" class="text-card"><p class="card-text">{{ $produto->titulo }}</p></a>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <strong class="text-muted">R$ {{ $produto->valor }}</strong>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline btn-card"><i class="fa-regular fa-heart"></i></button>
-                      <button type="button" class="btn btn-sm btn-outline btn-card"><i class="fa-regular fa-envelope"></i></button>
+                                    <div class="row borda justify-content-end pr-4">
+                                        <!--
+                                        #TODO:Criar identificador para o código do emprego, tipo codigoProduto()
+                                        -->
+                                        <small class="text-muted">Publicado em {{ date('d/m/Y H:i:s', strtotime($emprego->created_at)) }}</small>
+                                    </div>
+                            </div>
+                            <div class="row pr-4">
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-danger mt-2" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
+                                </div>
+                                <div class="col-md-5 mt-2 div_view">
+                                    <div class="views">
+                                        <i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <h6><span class="badge bg-secondary m-2 p-2 branco">{{ $emprego->regime }}</span></h6>
+                                </div>
+                                <div class="col-md-2 div_preco">
+                                    <h2><span class="badge bg-light mt-2">
+                                    @if($emprego->a_combinar)
+                                        a combinar
+                                    @else
+                                        {{ 'R$ '.$emprego->salario }}
+                                    @endif
+                                    </span><h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card_emp_direito">
+                            <div class="row">
+                                <div class="col-md-3 align-self-center"><i class="fa-solid fa-hotel"></i></div>
+                                <div class="col-md-9 title-emp align-self-center">{{ $emprego->nome_empresa }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 align-self-center"><i class="fa-regular fa-map"></i></div>
+                                <div class="col-md-9 content-emp align-self-center">{{ $emprego->cidade }}, {{ $emprego->estado }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 align-self-center"><i class="fa-solid fa-pen-nib"></i></div>
+                                <div class="col-md-9 content-emp align-self-center">{{ $emprego->qtd_vagas }} Vaga(s)</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 align-self-center"><i class="fa-regular fa-calendar"></i></i></div>
+                                <div class="col-md-9 content-emp align-self-center">Início Previsto: {{ date('d/m/Y', strtotime($emprego->data_inicio)) }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-              </div>
             </div>
-          </div>
           @endforeach
 
         </div>
@@ -139,6 +160,7 @@
     </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <div class="mt-5"> </div>
 
   @extends('layouts.footer')
 

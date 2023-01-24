@@ -246,7 +246,7 @@ let HTML = {
 
         return html_anuncio_servico = '<div class="card card_servico mb-1">' +
                                             '<div class="card-body">' +
-                                            '<h5 class="card-title" style="cursor: default;">' + titulo + '</h5>' +
+                                            '<h5 class="card-title"><a class="card-title" href="#">' + titulo + '</a></h5>' +
                                             '<p class="card-text">' + descricao_350 + '</p>' +
                                                 '<span class="valor_servico">Valor: R$ ' + valor + tag_porHora +' </span><br>' +
                                             '<button class="btn btn-outline-danger ' + css_porHora + '" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>' +
