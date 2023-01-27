@@ -34,6 +34,7 @@ Route::get('/minha_area/servicos', [App\Http\Controllers\MinhaArea::class, 'Anun
 
 Route::get('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'create'])->name('anuncio_produto');
 Route::post('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'store'])->name('anuncio_produto_salvar');
+Route::post('/anuncio_produto/inativar', [App\Http\Controllers\AnuncioProduto::class, 'inativar'])->name('anuncio_produto_inativar');
 
 Route::get('/anuncio_emprego', [App\Http\Controllers\AnuncioEmprego::class, 'create'])->name('anuncio_emprego');
 Route::post('/anuncio_emprego', [App\Http\Controllers\AnuncioEmprego::class, 'store'])->name('anuncio_emprego_salvar');

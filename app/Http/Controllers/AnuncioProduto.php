@@ -78,6 +78,12 @@ class AnuncioProduto extends Controller
 
     }
 
+    public function inativar(Request $request) {
+        
+        success('Categorias', 'Lista de categorias para o select do form', $request->input('id_produto'));
+
+    }
+
     public static function Categorias() {
 
         $categorias = Categoria::all();

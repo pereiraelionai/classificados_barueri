@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="row borda justify-content-end pr-4">
-                            <small class="text-muted">Publicado em {{ date( 'd/m/Y H:i:s' , strtotime($produto->created_at)) }} - cód. {{ codigoProduto($produto->id) }}</small>
+                            <small class="text-muted">Publicado em {{ date( 'd/m/Y H:i:s' , strtotime($produto->created_at)) }} - cód. PD{{ $produto->id }}</small>
                         </div>
                 </div>
                 <div class="row pr-4">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="row borda justify-content-start ml-2 mt-3">
-                    <button class="btn btn-outline-danger" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
+                    <button type="button" onclick="Inativar.showModal({{$produto->id}})" class="btn btn-outline-danger" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
                     <div class="views">
                         <i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>
                     </div>
@@ -71,3 +71,5 @@
     </div>
 </div>
 @endforeach
+
+@extends('_components.modal_inativar')

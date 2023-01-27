@@ -261,3 +261,39 @@ let HTML = {
         return html_sem_anuncio = '<h2 class="no-anuncio">Você não possui anúncios ainda :-(</h2>';
     }
 }
+
+let Inativar = {
+
+    showModal: function(id_produto) {
+
+        $('#modalInativar').modal('show');
+
+        
+    },
+
+    anuncio_produto: function(id_produto) {
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/anuncio_produto/inativar/",
+            dataType: "html",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{id_produto: id_produto},
+
+            success: function(result) {
+
+                var json = JSON.parse(result);
+                var dados = json.dados;
+
+                console.log(dados)
+
+            }, error: function(XMLHttpRequest, textStatus, errorThrow) {
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrow);
+            }
+        })
+    }
+}
