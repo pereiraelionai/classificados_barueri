@@ -265,13 +265,40 @@ let HTML = {
 let Inativar = {
 
     showModal: function(id_produto) {
-
+        Inativar.getMotivoCancelamento();
         $('#modalInativar').modal('show');
 
-        
+        document.getElementById('motivo').className = "form-control";
+        document.getElementById('msg_motivo').innerHTML = '';
+
+        jQuery.ajax({
+            type: "GET",
+            url: "/anuncio_produto/get_produto/"+id_produto,
+            dataType: "html",
+
+            data:{id_produto: id_produto},
+
+            success: function(result) {
+
+                var json = JSON.parse(result);
+                var dados = json.dados;
+
+                document.getElementById('inativar_title').innerHTML = 'Inativar: '+ dados[0].titulo;
+                document.getElementById('id_anuncio').value = id_produto;
+
+            }, error: function(XMLHttpRequest, textStatus, errorThrow) {
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrow);
+            }
+        })
     },
 
-    anuncio_produto: function(id_produto) {
+    anuncio_produto: function() {
+        var dados = {};
+        dados.anuncio_produtos_id = document.getElementById('id_anuncio').value;
+        dados.motivo_cancelados_id = document.getElementById('motivo').value;
+        dados.descricao = document.getElementById('descricao').value;
 
         jQuery.ajax({
             type: "POST",
@@ -280,14 +307,67 @@ let Inativar = {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            data:{id_produto: id_produto},
+            data: dados,
+
+            success: function(result) {
+
+                var json = JSON.parse(result);
+
+                if(json.error) {
+                    document.getElementById('motivo').className = "form-control is-invalid";
+                    document.getElementById('msg_motivo').innerHTML = json.error[0];
+                }
+
+                if(json.status = 'success') {
+                    document.getElementById('alert-success').style = "display: block;"
+                    $('#modalInativar').modal('hide');
+
+                    document.getElementById('alerta-sucesso-cont').innerHTML = "<strong>" + json.dados.titulo + "</strong>" + " inativado com sucesso!";
+
+                }
+
+
+            }, error: function(XMLHttpRequest) {
+                console.log(XMLHttpRequest.responseText)
+            }
+        })
+    },
+
+    fecharAlert: function() {
+        document.getElementById('alert-success').style = "display: none;"
+    },
+
+    getMotivoCancelamento: function() {
+        var dados = {}
+
+        jQuery.ajax({
+            type: "GET",
+            url: "/motivo_cancelados",
+            dataType: "html",
+            data:dados,
 
             success: function(result) {
 
                 var json = JSON.parse(result);
                 var dados = json.dados;
+                
+                var selectMotivo = document.getElementById('motivo');
+                selectMotivo.options.length = 0;
 
-                console.log(dados)
+                option = new Option('Selecione o motivo', '');
+                option.disabled = true;
+                option.selected = true;
+                selectMotivo.options[selectMotivo.options.length] = option;
+
+                if(json.status == 'success') {
+                    for(var i = 0; i < dados.length; i++) {
+                        
+                        option = new Option(dados[i].nome_motivo_cancelado, dados[i].id);
+                        selectMotivo.options[selectMotivo.options.length] = option;
+
+                    }
+                }
+                
 
             }, error: function(XMLHttpRequest, textStatus, errorThrow) {
                 console.log(XMLHttpRequest);

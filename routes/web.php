@@ -34,7 +34,8 @@ Route::get('/minha_area/servicos', [App\Http\Controllers\MinhaArea::class, 'Anun
 
 Route::get('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'create'])->name('anuncio_produto');
 Route::post('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'store'])->name('anuncio_produto_salvar');
-Route::post('/anuncio_produto/inativar', [App\Http\Controllers\AnuncioProduto::class, 'inativar'])->name('anuncio_produto_inativar');
+Route::get('/anuncio_produto/get_produto/{id_produto}', [App\Http\Controllers\AnuncioProduto::class, 'getProduto']);
+Route::post('/anuncio_produto/inativar', [App\Http\Controllers\AnuncioProduto::class, 'inativar']);
 
 Route::get('/anuncio_emprego', [App\Http\Controllers\AnuncioEmprego::class, 'create'])->name('anuncio_emprego');
 Route::post('/anuncio_emprego', [App\Http\Controllers\AnuncioEmprego::class, 'store'])->name('anuncio_emprego_salvar');
@@ -45,6 +46,7 @@ Route::post('/anuncio_servico', [App\Http\Controllers\AnuncioServico::class, 'st
 //rotas para Ajax
 Route::get('/anuncio_produto/categoria', [App\Http\Controllers\AnuncioProduto::class, 'Categorias'])->name('categorias');
 Route::get('/anuncio_emprego/regime', [App\Http\Controllers\AnuncioEmprego::class, 'Regimes'])->name('regimes');
+Route::get('/motivo_cancelados', [App\Http\Controllers\AnuncioProduto::class, 'MotivoCancelados'])->name('motivos');
 
 
 Route::prefix('/sistema')->group(function() {

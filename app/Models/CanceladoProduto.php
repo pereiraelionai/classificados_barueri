@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CanceladoProduto extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['id', 'anuncio_produtos_id', 'motivo_cancelados_id', 'descricao'];
+
 }

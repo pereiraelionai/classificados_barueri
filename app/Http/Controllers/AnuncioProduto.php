@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\MotivoCancelados;
 use App\Models\AnuncioProduto as Produto;
+use App\Models\CanceladoProduto;
+use Illuminate\Support\Facades\Validator;
 
 
 class AnuncioProduto extends Controller
@@ -78,9 +81,39 @@ class AnuncioProduto extends Controller
 
     }
 
-    public function inativar(Request $request) {
+    public function getProduto(Request $request) {
         
-        success('Categorias', 'Lista de categorias para o select do form', $request->input('id_produto'));
+        $anuncio_produto = Produto::where('id', '=', $request->input('id_produto'))->select('titulo')->get();
+        
+        success('Produto', 'Produto selecionado', $anuncio_produto);
+
+    }
+
+    public function inativar(Request $request) {
+
+        $regras = [
+            'motivo_cancelados_id' => 'required'
+        ];
+
+        $msg = [
+            'motivo_cancelados_id.required' => 'Selecione o motivo do cancelamento'
+        ];
+
+        $validator = Validator::make($request->all(), $regras, $msg);
+
+        if($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        $produto_cancelado = new CanceladoProduto();
+        $saveBd = $produto_cancelado->create($request->all());
+
+        $inativar = Produto::find($request->input('anuncio_produtos_id'));
+        $inativar->ativo = 0;
+        $inativar->update();
+        $produto = Produto::find($request->input('anuncio_produtos_id'));
+
+        success('Produto Inativado', 'Produto inativado com sucesso', $produto);        
 
     }
 
@@ -89,5 +122,13 @@ class AnuncioProduto extends Controller
         $categorias = Categoria::all();
 
         success('Categorias', 'Lista de categorias para o select do form', $categorias);
+    }
+
+    public function MotivoCancelados() {
+
+        $motivos = MotivoCancelados::all();
+
+        success('Motivos Cancelamento', 'Lista de motivos para o select do form', $motivos);
+
     }
 }

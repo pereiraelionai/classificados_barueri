@@ -44,6 +44,14 @@ function success($title, $msg, $data=null) {
     jsonReturn($title, $msg, 'success', $data);
 }
 
+function error($title, $msg, $data=null) {
+    jsonReturn($title, $msg, 'error', $data);
+}
+
+function warning($title, $msg, $data=null) {
+    jsonReturn($title, $msg, 'warning', $data);
+}
+
 function setImagem($name, $request) {
     $requestFoto = $request->file($name);
     $extencao = $requestFoto->extension();

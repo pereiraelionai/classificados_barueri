@@ -1,16 +1,25 @@
 <!-- Modal -->
 <div class="modal fade" id="modalInativar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Inativar Anúncio</h1>
+        <h1 class="modal-title fs-5" id="titulo_modal">Inativar Anúncio</h1>
       </div>
       <div class="modal-body">
-        <h4>Por que você quer inativar?<h4>
+        <h3 class="titulo_inativar" id="inativar_title">Por que você quer inativar?<h3>
+        <input type="hidden" id="id_anuncio">
+        <label for="motivo" class="form-label">Motivo</label>
+        <select class="form-control" id="motivo" name="motivo">
+          <option selected disabled>Selecione o motivo</option>
+        </select>
+        <small style="color: red; font-size: 13px;" id="msg_motivo"></small>
+        <br>
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea class="form-control" rows="3" id="descricao" name="descricao">{{old('descricao')}}</textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-danger"><i class="fa-regular fa-trash-can"></i> Inativar</button>
+        <button type="button" class="btn btn-outline-secondary btn-my-modal" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-danger" onclick="Inativar.anuncio_produto()"><i class="fa-regular fa-trash-can"></i> Inativar</button>
       </div>
     </div>
   </div>

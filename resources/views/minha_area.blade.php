@@ -3,7 +3,10 @@
 @section('content')
 
     <div class="container">
-
+        <div class="alert alert-success alert-dismissible fade show" style="display: none;" id="alert-success" role="alert">
+            <div id="alerta-sucesso-cont">Teste</div>
+            <a class="close-alert" onclick="Inativar.fecharAlert()"><i class="fa-solid fa-xmark"></i></a>
+        </div>
         <nav class="navbar fundo_container mb-4 p-4 sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand my-area"><i class="fa-solid fa-house"></i> Minha área</a>

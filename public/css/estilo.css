@@ -277,6 +277,16 @@ h6 {
   color: white;
 }
 
+.btn-my-modal {
+  border-color: rgb(84,64,91);
+  color: rgb(84,64,91);
+}
+
+.btn-my-modal:hover {
+  background-color: rgb(84,64,91);
+  color: white;
+}
+
 .views {
   color: rgb(84,64,91);
   font-size: 20px;
@@ -394,4 +404,21 @@ h6 {
 
 .titulo_filtro {
   color:rgb(84, 64, 91);
+}
+
+.titulo_inativar {
+  font-weight: bold;
+}
+
+.close-alert {
+  font-size: 20px;
+  color: #7FAA92;
+  float: right;
+  margin-right: -45px;
+  margin-top: -25px;
+}
+
+.close-alert:hover {
+  cursor: pointer;
+  color: #597767;
 }
