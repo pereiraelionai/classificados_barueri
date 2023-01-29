@@ -33,6 +33,8 @@
 
 
         <div class="fundo_container p-5 rounded">
+            @extends('_components.modal_inativar')
+
             <h1 class="display-5" id="titulo_minha_area">Meus Anúncios (Produtos)</h1>
             <hr>
             <div id="meus_anuncios_produtos">

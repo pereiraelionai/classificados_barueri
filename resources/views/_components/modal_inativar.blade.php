@@ -15,11 +15,12 @@
         <small style="color: red; font-size: 13px;" id="msg_motivo"></small>
         <br>
         <label for="descricao" class="form-label">Descrição</label>
-        <textarea class="form-control" rows="3" id="descricao" name="descricao">{{old('descricao')}}</textarea>
+        <textarea class="form-control" rows="3" id="descricao_modal" name="descricao"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary btn-my-modal" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-danger" onclick="Inativar.anuncio_produto()"><i class="fa-regular fa-trash-can"></i> Inativar</button>
+        <div id="bt-inativar">
+        </div>
       </div>
     </div>
   </div>

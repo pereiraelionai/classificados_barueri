@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    MinhaArea.meusAnuncios('produtos');
+});
+
 let MinhaArea = {
 
     meusAnuncios: function(tipo) {
@@ -26,33 +30,58 @@ let MinhaArea = {
                 break;
         }
 
-        if(tipo != 'produtos') {
-            var dados = {}
+        var dados = {}
 
-            jQuery.ajax({
-                type: "GET",
-                url: "/minha_area/" + tipo,
-                dataType: "html",
-                data:dados,
+        jQuery.ajax({
+            type: "GET",
+            url: "/minha_area/" + tipo,
+            dataType: "html",
+            data:dados,
     
-                success: function(result) {
+            success: function(result) {
 
-                    var json = JSON.parse(result);
-                    var dados = json.dados;
+                var json = JSON.parse(result);
+                var dados = json.dados;
 
-                    if(tipo == 'empregos') {
-                        MinhaArea.dadosAnuncioEmprego(dados);
-                    } else if (tipo == 'servicos') {
-                        MinhaArea.dadosAnuncioServicos(dados);
-                    }
-    
-                }, error: function(XMLHttpRequest, textStatus, errorThrow) {
-                    console.log(XMLHttpRequest);
-                    console.log(textStatus);
-                    console.log(errorThrow);
+                if(tipo == 'empregos') {
+                    MinhaArea.dadosAnuncioEmprego(dados);
+                } else if (tipo == 'servicos') {
+                    MinhaArea.dadosAnuncioServicos(dados);
+                } else if(tipo == 'produtos') {
+                    MinhaArea.dadosAnuncioProdutos(dados);
                 }
-            })
+    
+            }, error: function(XMLHttpRequest, textStatus, errorThrow) {
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrow);
+            }
+        })
+    },
+
+    dadosAnuncioProdutos: function(dados) {
+        var dadosProdutos = '';
+        if(dados.length > 0) {
+            for(var i = 0; i < dados.length; i++) {
+                dadosProdutos += HTML.anuncio_produto(
+                    dados[i].id,
+                    dados[i].titulo,
+                    dados[i].descricao,
+                    dados[i].created_at,
+                    dados[i].nome_categoria,
+                    dados[i].tipo,
+                    dados[i].valor,
+                    dados[i].foto_1,
+                    dados[i].foto2,
+                    dados[i].foto3,
+                    dados[i].foto4
+                );
+            }
+            document.getElementById('result_produtos').innerHTML = dadosProdutos;
+        } else {
+            document.getElementById('result_produtos').innerHTML = HTML.sem_anuncio();
         }
+
     },
 
     dadosAnuncioEmprego: function(dados) {
@@ -61,6 +90,7 @@ let MinhaArea = {
         if(dados.length > 0) {
             for(var i = 0; i < dados.length; i++) {
                 dadosEmpregos += HTML.anuncio_emprego(
+                    dados[i].id,
                     dados[i].titulo, 
                     dados[i].descricao, 
                     dados[i].nome_regime, 
@@ -134,7 +164,105 @@ let MinhaArea = {
 }
 
 let HTML = {
-    anuncio_emprego: function(titulo, descricao, regime, salario, combinar, empresa, cidade, estado, vagas, inicio, created_at) {
+    anuncio_produto: function(id, titulo, descricao, created_at, nome_categoria, tipo, valor, foto_1, foto_2, foto_3, foto_4) {
+        var foto2 = '';
+        var foto3 = '';
+        var foto4 = '';
+        var btn_carrousel = '';
+
+        if(foto_2) {
+            foto2 = '<div class="carousel-item">' +
+                            '<img src="img/anuncio_produtos/'+ foto_2 +'" class="img-fluid rounded-start" style="height: 310px;">' +
+                        '</div>'
+            
+            btn_carrousel =  '<button class="carousel-control-prev" type="button" data-target="#carouselAnuncio'+ id +'" data-slide="prev">' +
+                                '<span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-circle-left"></i></span>' +
+                            '</button>' +
+                            '<button class="carousel-control-next" type="button" data-target="#carouselAnuncio'+ id +'" data-slide="next">' +
+                                '<span class="icone-carousel" aria-hidden="true"><i class="fa-solid fa-circle-right"></i></span>' +
+                            '</button>'
+        }
+
+        if(foto_3) {
+            foto3 = '<div class="carousel-item">' +
+                            '<img src="img/anuncio_produtos/'+ foto_3 +'" class="img-fluid rounded-start" style="height: 310px;">' +
+                        '</div>'
+        }
+
+        if(foto_4) {
+            foto4 = '<div class="carousel-item">' +
+                            '<img src="img/anuncio_produtos/'+ foto_4 +'" class="img-fluid rounded-start" style="height: 310px;">' +
+                        '</div>'
+        }         
+        
+        //limitando 254 caracteres na descrição
+        descricao_254 = descricao.slice(0, 254) + '...';
+
+        //formatar data created at
+        data_time = new Date(created_at);
+        dia  = data_time.getDate().toString(),
+        diaF = (dia.length == 1) ? '0'+dia : dia,
+        mes  = (data_time.getMonth()+1).toString(), //+1 pois no getMonth Janeiro começa com zero.
+        mesF = (mes.length == 1) ? '0'+mes : mes,
+        anoF = data_time.getFullYear();
+        hora = data_time.getHours().toString(),
+        minutos = data_time.getMinutes().toString(),
+        segundos = data_time.getSeconds().toString(),
+        
+        data_created_at = diaF+"/"+mesF+"/"+anoF+' '+hora+':'+minutos+':'+segundos;
+
+        return html_anuncio_produto = '<div class="card mb-3">' +
+                                        '<div class="row g-0">' +
+                                            '<div class="col-md-4 img_anuncio">' +
+                                                '<div id="carouselAnuncio'+ id + '" class="carousel slide" data-ride="carousel">' +
+                                                    '<div class="carousel-inner">' +
+                                                        '<div class="carousel-item active">' +
+                                                            '<img src="img/anuncio_produtos/'+ foto_1 +'" class="img-fluid rounded-start" style="height: 310px;">' +
+                                                        '</div>' +
+                                                        foto2 +
+                                                        foto3 +
+                                                        foto4 +
+                                                    '</div>' +
+                                                        btn_carrousel +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<div class="col-md-7">' +
+                                                '<div class="card-body">' +
+                                                   '<div class="card-inner">' +
+                                                        '<h5><a class="card-title" href="#">'+ titulo +'</a></h5>' +
+                                                            '<p class="card-text mt-4">' +
+                                                                descricao_254 +
+                                                            '</p>' +
+                                                            '<div class="row borda justify-content-end pr-4">' +
+                                                                '<a class="link-desc" href="#">Ver descrição completa</a>' +
+                                                            '</div>' +
+                                    
+                                                            '<div class="row borda justify-content-end pr-4">' +
+                                                                '<small class="text-muted">Publicado em '+ data_created_at +' - cód. PD'+ id +'</small>' +
+                                                            '</div>' +
+                                                    '</div>' +
+                                                    '<div class="row pr-4">' +
+                                                        '<div class="col-md-9">' +
+                                                            '<h6><span class="badge bg-info m-2 p-2 branco">'+ nome_categoria +'</span></h6>' +
+                                                            '<h6><span class="badge bg-info m-2 p-2 branco">'+ tipo +'</span></h6>' +
+                                                        '</div>' +
+                                                        '<div class="col-md-3">' +
+                                                            '<h2><span class="badge bg-light mt-2">R$ ' + valor + '</span><h2>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                    '<div class="row borda justify-content-start ml-2 mt-3">' +
+                                                        '<button type="button" onclick="Inativar.showModal(\'produto\', '+ id +')" class="btn btn-outline-danger" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>' +
+                                                        '<div class="views">' +
+                                                            '<i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</div>';
+    },
+
+    anuncio_emprego: function(id, titulo, descricao, regime, salario, combinar, empresa, cidade, estado, vagas, inicio, created_at) {
         
         //formatando data
         data = new Date(inicio);
@@ -189,7 +317,7 @@ let HTML = {
                                                     '</div>' +
                                                     '<div class="row pr-4">' +
                                                         '<div class="col-md-3">' +
-                                                            '<button class="btn btn-outline-danger mt-2" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>'+
+                                                            '<button class="btn btn-outline-danger mt-2" onclick="Inativar.showModal(\'emprego\', '+ id +')" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>'+
                                                         '</div>' +
                                                         '<div class="col-md-5 mt-2 div_view">' +
                                                             '<div class="views">' +
@@ -264,19 +392,20 @@ let HTML = {
 
 let Inativar = {
 
-    showModal: function(id_produto) {
+    showModal: function(anuncio, id) {
         Inativar.getMotivoCancelamento();
         $('#modalInativar').modal('show');
 
         document.getElementById('motivo').className = "form-control";
         document.getElementById('msg_motivo').innerHTML = '';
+        document.getElementById('descricao_modal').value = '';
 
         jQuery.ajax({
             type: "GET",
-            url: "/anuncio_produto/get_produto/"+id_produto,
+            url: "/minha_area/get_"+ anuncio +"/"+id,
             dataType: "html",
 
-            data:{id_produto: id_produto},
+            data:{id: id},
 
             success: function(result) {
 
@@ -284,10 +413,18 @@ let Inativar = {
                 var dados = json.dados;
 
                 document.getElementById('inativar_title').innerHTML = 'Inativar: '+ dados[0].titulo;
-                document.getElementById('id_anuncio').value = id_produto;
+                document.getElementById('id_anuncio').value = id;
+
+                if(anuncio == 'produto') {
+                    document.getElementById('bt-inativar').innerHTML = '<button type="button" class="btn btn-danger" onclick="Inativar.anuncio_produto()"><i class="fa-regular fa-trash-can"></i> Inativar</button>'
+                } else if (anuncio == 'emprego') {
+                    document.getElementById('bt-inativar').innerHTML = '<button type="button" class="btn btn-danger" onclick="Inativar.anuncio_emprego()"><i class="fa-regular fa-trash-can"></i> Inativar</button>'
+                } else if(anuncio == 'servico') {
+                    document.getElementById('bt-inativar').innerHTML = '<button type="button" class="btn btn-danger" onclick="Inativar.anuncio_servico()"><i class="fa-regular fa-trash-can"></i> Inativar</button>'
+                }
 
             }, error: function(XMLHttpRequest, textStatus, errorThrow) {
-                console.log(XMLHttpRequest);
+                console.log(XMLHttpRequest.responseText);
                 console.log(textStatus);
                 console.log(errorThrow);
             }
@@ -298,7 +435,7 @@ let Inativar = {
         var dados = {};
         dados.anuncio_produtos_id = document.getElementById('id_anuncio').value;
         dados.motivo_cancelados_id = document.getElementById('motivo').value;
-        dados.descricao = document.getElementById('descricao').value;
+        dados.descricao = document.getElementById('descricao_modal').value;
 
         jQuery.ajax({
             type: "POST",
@@ -323,6 +460,47 @@ let Inativar = {
                     $('#modalInativar').modal('hide');
 
                     document.getElementById('alerta-sucesso-cont').innerHTML = "<strong>" + json.dados.titulo + "</strong>" + " inativado com sucesso!";
+                    MinhaArea.meusAnuncios('produtos');
+
+                }
+
+
+            }, error: function(XMLHttpRequest) {
+                console.log(XMLHttpRequest.responseText)
+            }
+        })
+    },
+
+    anuncio_emprego: function() {
+        var dados = {};
+        dados.anuncio_empregos_id = document.getElementById('id_anuncio').value;
+        dados.motivo_cancelados_id = document.getElementById('motivo').value;
+        dados.descricao = document.getElementById('descricao_modal').value;
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/anuncio_emprego/inativar/",
+            dataType: "html",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: dados,
+
+            success: function(result) {
+
+                var json = JSON.parse(result);
+
+                if(json.error) {
+                    document.getElementById('motivo').className = "form-control is-invalid";
+                    document.getElementById('msg_motivo').innerHTML = json.error[0];
+                }
+
+                if(json.status = 'success') {
+                    document.getElementById('alert-success').style = "display: block;"
+                    $('#modalInativar').modal('hide');
+
+                    document.getElementById('alerta-sucesso-cont').innerHTML = "<strong>" + json.dados.titulo + "</strong>" + " inativado com sucesso!";
+                    MinhaArea.meusAnuncios('empregos');
 
                 }
 

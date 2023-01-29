@@ -27,18 +27,22 @@ Route::get('/anuncie', function() {
 
 Auth::routes();
 
-Route::get('/minha_area', [App\Http\Controllers\MinhaArea::class, 'index'])->name('minha_area');
+Route::get('/minha_area', function() {
+    return view('minha_area');
+})->name('minha_area');
+Route::get('/minha_area/produtos', [App\Http\Controllers\MinhaArea::class, 'AnuncioProdutos']);
 Route::get('/minha_area/empregos', [App\Http\Controllers\MinhaArea::class, 'AnuncioEmpregos']);
-Route::get('/minha_area/empregos/dados', [App\Http\Controllers\MinhaArea::class, 'DadosAnuncioEmpregos']);
 Route::get('/minha_area/servicos', [App\Http\Controllers\MinhaArea::class, 'AnuncioServicos']);
+Route::get('/minha_area/get_produto/{id}', [App\Http\Controllers\MinhaArea::class, 'getProduto']);
+Route::get('/minha_area/get_emprego/{id}', [App\Http\Controllers\MinhaArea::class, 'getEmprego']);
 
 Route::get('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'create'])->name('anuncio_produto');
 Route::post('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'store'])->name('anuncio_produto_salvar');
-Route::get('/anuncio_produto/get_produto/{id_produto}', [App\Http\Controllers\AnuncioProduto::class, 'getProduto']);
 Route::post('/anuncio_produto/inativar', [App\Http\Controllers\AnuncioProduto::class, 'inativar']);
 
 Route::get('/anuncio_emprego', [App\Http\Controllers\AnuncioEmprego::class, 'create'])->name('anuncio_emprego');
 Route::post('/anuncio_emprego', [App\Http\Controllers\AnuncioEmprego::class, 'store'])->name('anuncio_emprego_salvar');
+Route::post('/anuncio_emprego/inativar', [App\Http\Controllers\AnuncioEmprego::class, 'inativar']);
 
 Route::get('/anuncio_servico', [App\Http\Controllers\AnuncioServico::class, 'create'])->name('anuncio_servico');
 Route::post('/anuncio_servico', [App\Http\Controllers\AnuncioServico::class, 'store'])->name('anuncio_servico_salvar');

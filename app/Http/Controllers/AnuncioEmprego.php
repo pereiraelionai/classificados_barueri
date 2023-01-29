@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Regime;
 use App\Models\AnuncioEmprego as Emprego;
+use App\Models\CanceladoEmprego;
+use Illuminate\Support\Facades\Validator;
 
 class AnuncioEmprego extends Controller
 {
@@ -134,6 +136,34 @@ class AnuncioEmprego extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function inativar(Request $request) {
+
+        $regras = [
+            'motivo_cancelados_id' => 'required'
+        ];
+
+        $msg = [
+            'motivo_cancelados_id.required' => 'Selecione o motivo do cancelamento'
+        ];
+
+        $validator = Validator::make($request->all(), $regras, $msg);
+
+        if($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        $emprego_cancelado = new CanceladoEmprego();
+        $saveBd = $emprego_cancelado->create($request->all());
+
+        $inativar = Emprego::find($request->input('anuncio_empregos_id'));
+        $inativar->ativo = 0;
+        $inativar->update();
+        $emprego = Emprego::find($request->input('anuncio_empregos_id'));
+
+        success('Emprego Inativado', 'Emprego inativado com sucesso', $emprego);        
+
     }
 
     public static function Regimes() {

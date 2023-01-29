@@ -81,14 +81,6 @@ class AnuncioProduto extends Controller
 
     }
 
-    public function getProduto(Request $request) {
-        
-        $anuncio_produto = Produto::where('id', '=', $request->input('id_produto'))->select('titulo')->get();
-        
-        success('Produto', 'Produto selecionado', $anuncio_produto);
-
-    }
-
     public function inativar(Request $request) {
 
         $regras = [

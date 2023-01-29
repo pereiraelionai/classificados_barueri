@@ -7,6 +7,7 @@ use App\Models\AnuncioProduto;
 use App\Models\AnuncioEmprego;
 use App\Models\AnuncioServico;
 
+
 class MinhaArea extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class MinhaArea extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function AnuncioProdutos()
     {   
         $id_user = auth()->user()->id;
         
@@ -34,7 +35,7 @@ class MinhaArea extends Controller
                             ->select('anuncio_produtos.*', 'categorias.nome_categoria', 'tipo_anuncios.tipo')
                             ->orderByRaw('anuncio_produtos.id DESC')->get();
         
-        return view('minha_area')->with('anuncio_produtos', $anuncios_produtos);
+        success('Anuncio Empregos', 'Lista de anuncio de empregos para a minha area', $anuncios_produtos);
     }
 
     public function AnuncioEmpregos() {
@@ -57,5 +58,21 @@ class MinhaArea extends Controller
                             ->orderByRaw('anuncio_servicos.id DESC')->get();
 
         success('Anuncio Empregos', 'Lista de anuncio de empregos para a minha area', $anuncio_servicos);
+    }
+
+    public function getProduto(Request $request) {
+        
+        $anuncio_produto = AnuncioProduto::where('id', '=', $request->input('id'))->select('titulo')->get();
+        
+        success('Produto', 'Produto selecionado', $anuncio_produto);
+
+    }
+
+    public function getEmprego(Request $request) {
+        
+        $anuncio_emprego = AnuncioEmprego::where('id', '=', $request->input('id'))->select('titulo')->get();
+        
+        success('Emprego', 'Emprego selecionado', $anuncio_emprego);
+
     }
 }
