@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AnuncioServico as Servico;
+use App\Models\CanceladoServico;
+use Illuminate\Support\Facades\Validator;
 
 class AnuncioServico extends Controller
 {
@@ -106,5 +108,33 @@ class AnuncioServico extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function inativar(Request $request) {
+
+        $regras = [
+            'motivo_cancelados_id' => 'required'
+        ];
+
+        $msg = [
+            'motivo_cancelados_id.required' => 'Selecione o motivo do cancelamento'
+        ];
+
+        $validator = Validator::make($request->all(), $regras, $msg);
+
+        if($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        $servico_cancelado = new CanceladoServico();
+        $saveBd = $servico_cancelado->create($request->all());
+
+        $inativar = Servico::find($request->input('anuncio_servicos_id'));
+        $inativar->ativo = 0;
+        $inativar->update();
+        $servico = Servico::find($request->input('anuncio_servicos_id'));
+
+        success('Serviço Inativado', 'Serviço inativado com sucesso', $servico);        
+
     }
 }

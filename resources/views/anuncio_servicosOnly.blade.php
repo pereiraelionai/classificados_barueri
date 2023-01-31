@@ -96,11 +96,6 @@
                             <h6><span class="badge bg-info m-2 p-2 branco tag_por_hora">Por Hora</span></h6>
                         @endif
                     </span><br>
-                    @if($servico->por_hora)
-                        <button class="btn btn-outline-danger mt-neg" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
-                    @else
-                        <button class="btn btn-outline-danger mt-2" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
-                    @endif
                 </div>
                 <div class="views view_servico">
                     <i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>

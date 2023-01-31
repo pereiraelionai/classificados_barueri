@@ -50,7 +50,7 @@
             </div>
 
             <div id="anuncios_inativos" style="display: none">
-                Anuncios Inativos
+                @include('_components.table_inativos')
             </div>
 
             <div id="anuncios_favoritos" style="display: none">

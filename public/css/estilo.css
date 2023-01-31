@@ -296,7 +296,7 @@ h6 {
 
 .view_servico {
   margin: auto;
-  margin-left: 130px;
+  margin-left: 20px;
   padding-bottom: 15px;;
 }
 
@@ -421,4 +421,8 @@ h6 {
 .close-alert:hover {
   cursor: pointer;
   color: #597767;
+}
+
+.header-table {
+  background-color: #DCDCDC;
 }

@@ -117,6 +117,7 @@ let MinhaArea = {
         if(dados.length > 0) {
             for(var i = 0; i < dados.length; i++) {
                 dadosServicos += HTML.anuncio_servico(
+                    dados[i].id,
                     dados[i].titulo,
                     dados[i].descricao,
                     dados[i].por_hora,
@@ -140,6 +141,7 @@ let MinhaArea = {
         document.getElementById('anuncios_inativos').style = 'display: block'
         document.getElementById('anuncios_favoritos').style = 'display: none'
         document.getElementById('mensagens').style = 'display: none'
+        Inativar.getInativos();
     },
 
     favoritos: function() {
@@ -357,7 +359,7 @@ let HTML = {
                                     '</div>';
     },
 
-    anuncio_servico: function(titulo, descricao, por_hora, valor) {
+    anuncio_servico: function(id, titulo, descricao, por_hora, valor) {
 
         //limitando 293 caracteres na descrição
         descricao_350 = descricao.slice(0, 350) + '...';
@@ -377,12 +379,43 @@ let HTML = {
                                             '<h5 class="card-title"><a class="card-title" href="#">' + titulo + '</a></h5>' +
                                             '<p class="card-text">' + descricao_350 + '</p>' +
                                                 '<span class="valor_servico">Valor: R$ ' + valor + tag_porHora +' </span><br>' +
-                                            '<button class="btn btn-outline-danger ' + css_porHora + '" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>' +
+                                            '<button class="btn btn-outline-danger ' + css_porHora + '" type="button" onclick="Inativar.showModal(\'servico\', '+ id +')"><i class="fa-regular fa-trash-can"></i> Inativar</button>' +
                                             '</div>' +
                                                 '<div class="views view_servico">' +
-                                                    '<i class="fa-sharp fa-solid fa-eye"></i><span> 50</span>' +
+                                                    '<i class="fa-sharp fa-solid fa-eye" style="margin-left: 110px; margin-top: -10px;"></i><span> 50</span>' +
                                             '</div>' +
                                         '</div>';
+    },
+
+    tabela_inativos: function(id, titulo, valor, tipo_anuncio) {
+        var id_table = '';
+        var valor_table = '';
+        
+        switch (tipo_anuncio) {
+            case 1:
+                id_table = 'PD'+id
+                break;
+            case 2: 
+                id_table = 'EMP'+id
+                break;
+            case 3:
+                id_table = 'SER'+id
+                break;
+        }
+
+        if(valor != null) {
+            valor_table = 'R$ ' + valor;
+        } else {
+            valor_table = 'N.A';
+        }
+
+        return html_tabela_inativos =       '<tr class="table-light">' +
+                                                '<th scope="row">'+ id_table +'</th>' +
+                                                '<td colspan="3">' + titulo + '</td>' +
+                                                '<td>' + valor_table + '</td>' +
+                                                '<td><button class="btn btn-primary" onclick="Reativar.ativar('+ id +', '+ tipo_anuncio +')">Reativar</button></td>' +
+                                            '</tr>';
+
     },
 
     sem_anuncio: function() {
@@ -511,6 +544,46 @@ let Inativar = {
         })
     },
 
+    anuncio_servico: function() {
+        var dados = {};
+        dados.anuncio_servicos_id = document.getElementById('id_anuncio').value;
+        dados.motivo_cancelados_id = document.getElementById('motivo').value;
+        dados.descricao = document.getElementById('descricao_modal').value;
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/anuncio_servico/inativar/",
+            dataType: "html",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: dados,
+
+            success: function(result) {
+
+                var json = JSON.parse(result);
+
+                if(json.error) {
+                    document.getElementById('motivo').className = "form-control is-invalid";
+                    document.getElementById('msg_motivo').innerHTML = json.error[0];
+                }
+
+                if(json.status = 'success') {
+                    document.getElementById('alert-success').style = "display: block;"
+                    $('#modalInativar').modal('hide');
+
+                    document.getElementById('alerta-sucesso-cont').innerHTML = "<strong>" + json.dados.titulo + "</strong>" + " inativado com sucesso!";
+                    MinhaArea.meusAnuncios('servicos');
+
+                }
+
+
+            }, error: function(XMLHttpRequest) {
+                console.log(XMLHttpRequest.responseText)
+            }
+        })
+    },
+
     fecharAlert: function() {
         document.getElementById('alert-success').style = "display: none;"
     },
@@ -549,6 +622,43 @@ let Inativar = {
 
             }, error: function(XMLHttpRequest, textStatus, errorThrow) {
                 console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrow);
+            }
+        })
+    },
+
+    getInativos: function() {
+        var dados = {}
+
+        jQuery.ajax({
+            type: "GET",
+            url: "/minha_area/inativos",
+            dataType: "html",
+            data:dados,
+
+            success: function(result) {
+                
+                var json = JSON.parse(result);
+                var dados = json.dados
+
+                var dadosInativos = '';
+                if(dados.length > 0) {
+                    for(var i = 0; i < dados.length; i++) {
+                        dadosInativos += HTML.tabela_inativos(
+                            dados[i].id,
+                            dados[i].titulo,
+                            dados[i].valor,
+                            dados[i].tipo_anuncio_id
+                        );
+                    }
+                    document.getElementById('content-table-inativos').innerHTML = dadosInativos;
+                } else {
+                    document.getElementById('tabela_inativos').innerHTML = HTML.sem_anuncio();
+                }
+                
+            }, error: function(XMLHttpRequest, textStatus, errorThrow) {
+                console.log(XMLHttpRequest.responseText);
                 console.log(textStatus);
                 console.log(errorThrow);
             }

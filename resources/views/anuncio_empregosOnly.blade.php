@@ -108,8 +108,7 @@
                                     </div>
                             </div>
                             <div class="row pr-4">
-                                <div class="col-md-3">
-                                    <button class="btn btn-outline-danger mt-2" type="button"><i class="fa-regular fa-trash-can"></i> Inativar</button>
+                                <div class="col-md-1">
                                 </div>
                                 <div class="col-md-5 mt-2 div_view">
                                     <div class="views">
