@@ -17,7 +17,7 @@ function favorito(produto_id, tipo_anuncio, titulo) {
     
     jQuery.ajax({
         type: "POST",
-        url: "/favoritos/",
+        url: "/favoritos",
         dataType: "html",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,6 +28,10 @@ function favorito(produto_id, tipo_anuncio, titulo) {
 
             var json = JSON.parse(result);
             var titulo = json.dados;
+
+            if(json.status == 'error') {
+                window.location.assign("http://127.0.0.1:8000/login");
+            }
             
             if(json.status == 'success') {
                 document.getElementById('alert-success').style = "display: block;"

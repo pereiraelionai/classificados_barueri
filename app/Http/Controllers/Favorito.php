@@ -9,6 +9,10 @@ class Favorito extends Controller
 {
     public function setFavorito(Request $request) {
 
+        if(!auth()->user()) {
+            error('Usuário não autenticado', 'Autentique-se para utilizar o sistema');
+        }
+
         $user = auth()->user()->id;
         $check = $request->input('check');
         $anuncio_id = $request->input('anuncio_id');
