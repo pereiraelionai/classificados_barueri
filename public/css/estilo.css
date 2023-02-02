@@ -426,3 +426,7 @@ h6 {
 .header-table {
   background-color: #DCDCDC;
 }
+
+.format_icon_fav {
+  color: red;
+}

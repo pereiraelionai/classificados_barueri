@@ -7,6 +7,8 @@ use App\Models\AnuncioProduto;
 use App\Models\Categoria;
 use App\Models\AnuncioEmprego;
 use App\Models\AnuncioServico;
+use App\Models\Favorito;
+use App\Classes\stdObject;
 
 class HomeController extends Controller
 {
@@ -20,7 +22,19 @@ class HomeController extends Controller
         ->select('anuncio_produtos.*', 'categorias.nome_categoria', 'tipo_anuncios.tipo')
         ->orderByRaw('anuncio_produtos.id DESC')->get();
 
-        return view('index')->with('anuncio_produtos', $anuncios_produtos);
+        $array_favorito = [];
+
+        if(auth()->user()) {
+            $user = auth()->user()->id;
+            foreach($anuncios_produtos as $produto) {
+                $favorito = Favorito::where('users_id', '=', $user)
+                                    ->where('anuncio_id', '=', $produto->id)
+                                    ->where('tipo_anuncios_id', '=', $produto->tipo_anuncios_id)->get();
+                $array_favorito[] = $favorito;
+            }
+        }
+        
+        return view('index')->with('anuncio_produtos', $anuncios_produtos)->with('favoritos', $array_favorito)->with('checked', '')->with('icone', 'fa-regular');
     }
     #TODO:Criar paginação para os anuncios
     public function anuncioFiltro($filtro) {

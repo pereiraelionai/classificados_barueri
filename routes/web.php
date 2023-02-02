@@ -37,6 +37,7 @@ Route::get('/minha_area/get_produto/{id}', [App\Http\Controllers\MinhaArea::clas
 Route::get('/minha_area/get_emprego/{id}', [App\Http\Controllers\MinhaArea::class, 'getEmprego']);
 Route::get('/minha_area/get_servico/{id}', [App\Http\Controllers\MinhaArea::class, 'getServico']);
 Route::get('/minha_area/inativos', [App\Http\Controllers\MinhaArea::class, 'getInativos']);
+Route::get('/minha_area/favoritos', [App\Http\Controllers\MinhaArea::class, 'getFavoritos']);
 
 Route::get('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'create'])->name('anuncio_produto');
 Route::post('/anuncio_produto', [App\Http\Controllers\AnuncioProduto::class, 'store'])->name('anuncio_produto_salvar');
@@ -55,6 +56,7 @@ Route::get('/anuncio_produto/categoria', [App\Http\Controllers\AnuncioProduto::c
 Route::get('/anuncio_emprego/regime', [App\Http\Controllers\AnuncioEmprego::class, 'Regimes'])->name('regimes');
 Route::get('/motivo_cancelados', [App\Http\Controllers\AnuncioProduto::class, 'MotivoCancelados'])->name('motivos');
 
+Route::post('/favoritos', [App\Http\Controllers\Favorito::class, 'setFavorito']);
 
 Route::prefix('/sistema')->group(function() {
 

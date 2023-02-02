@@ -145,13 +145,15 @@ let MinhaArea = {
     },
 
     favoritos: function() {
-        document.getElementById('titulo_minha_area').innerHTML = 'Mensagens';
+        document.getElementById('titulo_minha_area').innerHTML = 'Favoritos';
         document.getElementById('meus_anuncios_produtos').style = 'display: none'
         document.getElementById('meus_anuncios_empregos').style = 'display: none'
         document.getElementById('meus_anuncios_servicos').style = 'display: none'
         document.getElementById('anuncios_inativos').style = 'display: none'
         document.getElementById('anuncios_favoritos').style = 'display: block'
         document.getElementById('mensagens').style = 'display: none'
+        Favoritos.getFavoritos();
+        
     },
 
     mensagens: function() {
@@ -413,7 +415,38 @@ let HTML = {
                                                 '<th scope="row">'+ id_table +'</th>' +
                                                 '<td colspan="3">' + titulo + '</td>' +
                                                 '<td>' + valor_table + '</td>' +
-                                                '<td><button class="btn btn-primary" onclick="Reativar.ativar('+ id +', '+ tipo_anuncio +')">Reativar</button></td>' +
+                                                '<td><button class="btn btn-primary" onclick="Reativar.ativar('+ id +', '+ tipo_anuncio +')"><i class="fa-solid fa-arrows-rotate"></i> Reativar</button></td>' +
+                                            '</tr>';
+
+    },
+
+    tabela_favoritos: function(id, titulo, valor, tipo_anuncio) {
+        var id_table = '';
+        var valor_table = '';
+        
+        switch (tipo_anuncio) {
+            case 1:
+                id_table = 'PD'+id
+                break;
+            case 2: 
+                id_table = 'EMP'+id
+                break;
+            case 3:
+                id_table = 'SER'+id
+                break;
+        }
+
+        if(valor != null) {
+            valor_table = 'R$ ' + valor;
+        } else {
+            valor_table = 'N.A';
+        }
+
+        return html_tabela_favoritos =       '<tr class="table-light">' +
+                                                '<th scope="row">'+ id_table +'</th>' +
+                                                '<td colspan="3">' + titulo + '</td>' +
+                                                '<td>' + valor_table + '</td>' +
+                                                '<td><button class="btn btn-warning" onclick="Reativar.ativar('+ id +', '+ tipo_anuncio +')"><i class="fa-solid fa-envelope"></i> Mensagem</button></td>' +
                                             '</tr>';
 
     },
@@ -655,6 +688,48 @@ let Inativar = {
                     document.getElementById('content-table-inativos').innerHTML = dadosInativos;
                 } else {
                     document.getElementById('tabela_inativos').innerHTML = HTML.sem_anuncio();
+                }
+                
+            }, error: function(XMLHttpRequest, textStatus, errorThrow) {
+                console.log(XMLHttpRequest.responseText);
+                console.log(textStatus);
+                console.log(errorThrow);
+            }
+        })
+    }
+}
+
+let Favoritos = {
+    getFavoritos: function() {
+        var dados = {}
+
+        jQuery.ajax({
+            type: "GET",
+            url: "/minha_area/favoritos",
+            dataType: "html",
+            data:dados,
+
+            success: function(result) {
+
+                var json = JSON.parse(result);
+                var dados = json.dados
+
+                var dadosFavoritos = '';
+                if(dados.length > 0) {
+                    for(var i = 0; i < dados.length; i++) {
+                        for(var j = 0; j < dados.length; j++) {
+                            dadosFavoritos += HTML.tabela_favoritos(
+                                dados[j].id,
+                                dados[j].titulo,
+                                dados[j].valor,
+                                dados[j].tipo_anuncios_id
+                            );
+                        }
+                        break;
+                    }
+                    document.getElementById('content-table-favoritos').innerHTML = dadosFavoritos;
+                } else {
+                    document.getElementById('tabela_favoritos').innerHTML = HTML.sem_anuncio();
                 }
                 
             }, error: function(XMLHttpRequest, textStatus, errorThrow) {

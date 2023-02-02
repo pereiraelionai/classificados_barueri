@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\AnuncioProduto;
 use App\Models\AnuncioEmprego;
 use App\Models\AnuncioServico;
+use App\Models\Favorito;
 use App\Classes\stdObject;
 
 
@@ -124,5 +125,28 @@ class MinhaArea extends Controller
 
         success('Inativos', 'Inativos para a table', $array_inativos);
 
+    }
+
+    public function getFavoritos() {
+
+        $id_user = auth()->user()->id;
+        $array_favoritos = [];
+
+        $favoritos = Favorito::where('users_id', '=', $id_user)->get();
+
+        foreach($favoritos as $favorito) {
+            if($favorito->tipo_anuncios_id == 1) {
+                $produtos_favoritos = AnuncioProduto::where('ativo', '=', 1)->where('id', '=', $favorito->anuncio_id)->select('id', 'titulo', 'valor', 'tipo_anuncios_id')->get();
+                $array_favoritos[] = $produtos_favoritos[0];
+            } else if($favorito->tipo_anuncios_id == 2) {
+                $servicos_favoritos = AnuncioServico::where('ativo', '=', 1)->where('id', '=', $favorito->anuncio_id)->select('id', 'titulo', 'valor', 'tipo_anuncios_id')->get();
+                $array_favoritos[] = $servicos_favoritos;
+            } else if($favorito->tipo_anuncios_id == 3) {
+                $empregos_favoritos = AnuncioEmprego::where('ativo', '=', 1)->where('id', '=', $favorito->anuncio_id)->select('id', 'titulo', 'valor', 'tipo_anuncios_id')->get();
+                $array_favoritos[] = $empregos_favoritos;
+            }
+        }
+
+        success('Favoritos', 'Favoritos para a table', $array_favoritos);
     }
 }

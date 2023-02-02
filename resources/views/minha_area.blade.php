@@ -54,7 +54,7 @@
             </div>
 
             <div id="anuncios_favoritos" style="display: none">
-                Anuncios Favoritos
+                @include('_components.table_favoritos')
             </div>
 
             <div id="mensagens" style="display: none">
