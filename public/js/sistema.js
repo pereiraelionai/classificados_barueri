@@ -72,9 +72,9 @@ let MinhaArea = {
                     dados[i].tipo,
                     dados[i].valor,
                     dados[i].foto_1,
-                    dados[i].foto2,
-                    dados[i].foto3,
-                    dados[i].foto4
+                    dados[i].foto_2,
+                    dados[i].foto_3,
+                    dados[i].foto_4
                 );
             }
             document.getElementById('result_produtos').innerHTML = dadosProdutos;
@@ -375,7 +375,7 @@ let HTML = {
             tag_porHora ='';
             css_porHora = 'mt-2';
         }
-
+        //#TODO: Corrigir btn inativar, o click está com problema no css
         return html_anuncio_servico = '<div class="card card_servico mb-1">' +
                                             '<div class="card-body">' +
                                             '<h5 class="card-title"><a class="card-title" href="#">' + titulo + '</a></h5>' +
@@ -615,10 +615,6 @@ let Inativar = {
                 console.log(XMLHttpRequest.responseText)
             }
         })
-    },
-
-    fecharAlert: function() {
-        document.getElementById('alert-success').style = "display: none;"
     },
 
     getMotivoCancelamento: function() {

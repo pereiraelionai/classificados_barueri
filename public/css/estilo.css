@@ -430,3 +430,11 @@ h6 {
 .format_icon_fav {
   color: red;
 }
+
+.link_msg {
+  color: #44354a;
+}
+
+.link_msg:hover {
+  color: white;
+}

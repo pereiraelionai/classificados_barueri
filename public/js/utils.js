@@ -277,3 +277,7 @@ let Mascara = {
         };
     }
 }
+
+function fecharAlert() {
+    document.getElementById('alert-success').style = "display: none;"
+}
