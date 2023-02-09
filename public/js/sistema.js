@@ -7,7 +7,6 @@ let MinhaArea = {
     meusAnuncios: function(tipo) {
         document.getElementById('anuncios_inativos').style = 'display: none'
         document.getElementById('anuncios_favoritos').style = 'display: none'
-        document.getElementById('mensagens').style = 'display: none'
 
         switch(tipo) {
             case 'produtos':
@@ -140,7 +139,6 @@ let MinhaArea = {
         document.getElementById('meus_anuncios_servicos').style = 'display: none'
         document.getElementById('anuncios_inativos').style = 'display: block'
         document.getElementById('anuncios_favoritos').style = 'display: none'
-        document.getElementById('mensagens').style = 'display: none'
         Inativar.getInativos();
     },
 
@@ -151,19 +149,8 @@ let MinhaArea = {
         document.getElementById('meus_anuncios_servicos').style = 'display: none'
         document.getElementById('anuncios_inativos').style = 'display: none'
         document.getElementById('anuncios_favoritos').style = 'display: block'
-        document.getElementById('mensagens').style = 'display: none'
         Favoritos.getFavoritos();
         
-    },
-
-    mensagens: function() {
-        document.getElementById('titulo_minha_area').innerHTML = 'Favoritos';
-        document.getElementById('meus_anuncios_produtos').style = 'display: none'
-        document.getElementById('meus_anuncios_empregos').style = 'display: none'
-        document.getElementById('meus_anuncios_servicos').style = 'display: none'
-        document.getElementById('anuncios_inativos').style = 'display: none'
-        document.getElementById('anuncios_favoritos').style = 'display: none'
-        document.getElementById('mensagens').style = 'display: block'
     }
 }
 

@@ -30,10 +30,7 @@
             <div id="anuncios_favoritos" style="display: none">
                 @include('_components.table_favoritos')
             </div>
-
-            <div id="mensagens" style="display: none">
-                Mensagens
-            </div>                                    
+                                              
             <hr>
         </div>
   </div>

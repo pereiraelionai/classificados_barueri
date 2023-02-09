@@ -10,7 +10,7 @@
             <h3 class="border-bottom pb-2 mb-0">Mensagens</h3>
             @foreach($mensagens as $mensagem)
                 <div class="d-flex text-muted pt-3">
-                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded mt-1" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#44354a"/><text x="50%" y="50%" fill="#FFFFFF" dy=".3em"></text></svg>
+                    <img src="img/anuncio_produtos/{{ $mensagem->foto_1 }}" class="img-thumbnail" style="width: 60px;">
 
                     <div class="pb-3 mb-0  lh-sm border-bottom w-100 ml-2">
                         <div class="d-flex justify-content-between">

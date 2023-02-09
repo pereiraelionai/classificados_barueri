@@ -19,7 +19,7 @@ class Mensagem extends Controller
         $mensagens = ORMMensagem::where('id_remetente', $id_user)->orWhere('id_destinatario', $id_user)
                                 ->leftjoin('tipo_anuncios', 'tipo_anuncio', '=', 'tipo_anuncios.id')
                                 ->leftjoin('anuncio_produtos', 'anuncio_id', '=', 'anuncio_produtos.id')
-                                ->select('mensagens.*', 'tipo_anuncios.tipo', 'anuncio_produtos.titulo as title_anuncio')->get();
+                                ->select('mensagens.*', 'tipo_anuncios.tipo', 'anuncio_produtos.titulo as title_anuncio', 'anuncio_produtos.foto_1')->get();
 
         $qtdConversaNaoLida = Conversa::where('dest_id', auth()->user()->id)->where('lida', 0)->count();
 
