@@ -8,6 +8,7 @@ use App\Models\AnuncioEmprego;
 use App\Models\AnuncioServico;
 use App\Models\Favorito;
 use App\Classes\stdObject;
+use App\Models\Conversa;
 
 
 class MinhaArea extends Controller
@@ -20,6 +21,13 @@ class MinhaArea extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index() {
+
+        $qtdConversaNaoLida = Conversa::where('dest_id', auth()->user()->id)->where('lida', 0)->count();
+
+        return view('minha_area')->with('qtdConversaNaoLida', $qtdConversaNaoLida);
     }
 
     /**

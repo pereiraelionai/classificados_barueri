@@ -446,7 +446,7 @@ let HTML = {
                                                 '<th scope="row">'+ id_table +'</th>' +
                                                 '<td colspan="3">' + titulo + '</td>' +
                                                 '<td>' + valor_table + '</td>' +
-                                                '<td><button class="btn btn-warning" onclick="Reativar.ativar('+ id +', '+ tipo_anuncio +')"><i class="fa-solid fa-envelope"></i> Mensagem</button></td>' +
+                                                '<td><button class="btn btn-warning" onclick="RedirectMsg('+ id +', '+ tipo_anuncio +')"><i class="fa-solid fa-envelope"></i> Mensagem</button></td>' +
                                             '</tr>';
 
     },
@@ -735,4 +735,8 @@ let Favoritos = {
             }
         })
     }
+}
+
+function RedirectMsg(id, tipo_anuncio) {
+    window.location.href = 'http://127.0.0.1:8000/mensagens/'+id+'/'+tipo_anuncio;
 }

@@ -83,10 +83,12 @@
 
     <div class="album py-4 bg-light">
       <div class="container">
+
+      @include('_components.alert')
   
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           
-          @foreach($anuncio_filtrado as $produto)
+          @foreach($anuncios_produtos as $produto)
           <div class="col mb-3">
             <div class="card shadow-sm">
               <div id="carouselAnuncio{{ $produto->id }}" class="carousel slide" data-ride="carousel">
@@ -125,8 +127,28 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <strong class="text-muted">R$ {{ $produto->valor }}</strong>
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline btn-card"><i class="fa-regular fa-heart"></i></button>
-                      <button type="button" class="btn btn-sm btn-outline btn-card"><i class="fa-regular fa-envelope"></i></button>
+
+                        {{-- Criando lógica para setar o btn favorito --}}
+                        @php
+                          $icone = 'fa-regular fa-heart';
+                          $checked = '';
+                        @endphp
+                        @foreach($favoritos as $favorito)
+                          @if(isset($favorito[0]->id))
+                              @php
+                                if($favorito[0]->anuncio_id == $produto->id) {
+                                  $icone = 'fa-solid fa-heart format_icon_fav';
+                                  $checked = 'checked';
+                                }
+                              @endphp
+                          @endif                       
+                        @endforeach
+
+
+                      <input type="checkbox" class="btn-check" id="checkFavorito{{$produto->id}}" autocomplete="off" style="display: none;" {{$checked}}>
+                      <label class="btn btn-sm btn-outline btn-card" for="checkFavorito" style="border-radius: 3px 0px 0px 3px;" onclick="favorito({{$produto->id}}, {{$produto->tipo_anuncios_id}}, '{{$produto->titulo}}')"><i id="iconFavorito{{$produto->id}}" class="{{$icone}}"></i></label> 
+                      
+                      <a href="{{ route('mensagem_form', ['id_anuncio' => $produto->id, 'tipo_anuncio' => $produto->tipo_anuncios_id]) }}" class="btn btn-sm btn-outline btn-card btn-msg-height-filtro" for="btncheck2" onMouseOver="formatarBtnMsgProdHover({{$produto->id}})" onMouseOut="formatarBtnMsgProdNoHover({{$produto->id}})"><i class="fa-regular fa-envelope"></i></a>
                     </div>
                 </div>
               </div>

@@ -28,9 +28,7 @@ Route::get('/anuncie', function() {
 Auth::routes();
 
 //rotas minha área
-Route::get('/minha_area', function() {
-    return view('minha_area');
-})->name('minha_area')->middleware('auth');
+Route::get('/minha_area', [App\Http\Controllers\MinhaArea::class, 'index'])->name('minha_area')->middleware('auth');
 Route::get('/minha_area/produtos', [App\Http\Controllers\MinhaArea::class, 'AnuncioProdutos'])->middleware('auth');
 Route::get('/minha_area/empregos', [App\Http\Controllers\MinhaArea::class, 'AnuncioEmpregos'])->middleware('auth');
 Route::get('/minha_area/servicos', [App\Http\Controllers\MinhaArea::class, 'AnuncioServicos'])->middleware('auth');
@@ -67,3 +65,5 @@ Route::post('/favoritos', [App\Http\Controllers\Favorito::class, 'setFavorito'])
 Route::get('/mensagens/{id_anuncio}/{tipo_anuncio}', [App\Http\Controllers\Mensagem::class, 'create'])->name('mensagem_form')->middleware('auth');
 Route::post('/mensagens/enviar', [App\Http\Controllers\Mensagem::class, 'store'])->name('mensagem_send')->middleware('auth');
 Route::get('/mensagens', [App\Http\Controllers\Mensagem::class, 'index'])->name('mensagens')->middleware('auth');
+Route::post('/mensagens/enviar_resposta', [App\Http\Controllers\Mensagem::class, 'resposta'])->middleware('auth');
+Route::get('/conversa/{id_mensagem}', [App\Http\Controllers\Mensagem::class, 'conversa'])->name('conversa')->middleware('auth');

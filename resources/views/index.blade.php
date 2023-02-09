@@ -133,7 +133,7 @@
                       <input type="checkbox" class="btn-check" id="checkFavorito{{$produto->id}}" autocomplete="off" style="display: none;" {{$checked}}>
                       <label class="btn btn-sm btn-outline btn-card" for="checkFavorito" style="border-radius: 3px 0px 0px 3px;" onclick="favorito({{$produto->id}}, {{$produto->tipo_anuncios_id}}, '{{$produto->titulo}}')"><i id="iconFavorito{{$produto->id}}" class="{{$icone}}"></i></label> 
                       
-                      <label class="btn btn-sm btn-outline btn-card" for="btncheck2" onMouseOver="formatarBtnMsgProdHover({{$produto->id}})" onMouseOut="formatarBtnMsgProdNoHover({{$produto->id}})"><a href="{{ route('mensagem_form', ['id_anuncio' => $produto->id, 'tipo_anuncio' => $produto->tipo_anuncios_id]) }}" class="link_msg" id="link{{$produto->id}}"><i class="fa-regular fa-envelope"></i></a></label>
+                      <a href="{{ route('mensagem_form', ['id_anuncio' => $produto->id, 'tipo_anuncio' => $produto->tipo_anuncios_id]) }}" class="btn btn-sm btn-outline btn-card btn-msg-height" for="btncheck2" onMouseOver="formatarBtnMsgProdHover({{$produto->id}})" onMouseOut="formatarBtnMsgProdNoHover({{$produto->id}})"><i class="fa-regular fa-envelope"></i></a>
                     </div>
                 </div>
               </div>

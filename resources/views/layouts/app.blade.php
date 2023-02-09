@@ -14,6 +14,7 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/utils.js') }}"></script>
         <script src="{{ asset('js/sistema.js') }}"></script>
+        <script src="{{ asset('js/mensagens.js') }}"></script>
 
 
     <!-- Fonts -->

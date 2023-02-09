@@ -267,9 +267,18 @@ h6 {
 }
 
 .btn-my-area {
-  margin-top: -15px;
   border-color: rgb(84,64,91);
   color: rgb(84,64,91);
+}
+
+.btn-my-area-conversa {
+  border-color: rgb(84,64,91);
+  color: rgb(84,64,91);
+}
+
+.btn-my-area-conversa:hover {
+  background-color: rgb(84,64,91);
+  color: white;
 }
 
 .btn-my-area:hover {
@@ -437,4 +446,16 @@ h6 {
 
 .link_msg:hover {
   color: white;
+}
+
+.text-bg-badge {
+  background-color: orange;
+}
+
+.btn-msg-height {
+  height: 29px;
+}
+
+.btn-msg-height-filtro {
+  height: 23px;
 }

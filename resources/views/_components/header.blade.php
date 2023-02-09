@@ -7,7 +7,14 @@
             <li><a href="#" class="nav-link px-2 fonte_header"><i class="fa-solid fa-star"></i> Sua Marca</a></li>
             <li><a href="{{ route('anuncie') }}" class="nav-link px-2 fonte_header"><i class="fa-solid fa-fire"></i> Anuncie Grátis</a></li>
             <li><a href="{{ route('minha_area') }}" class="nav-link px-2 fonte_header"><i class="fa-solid fa-box-archive"></i> Minha Área</a></li>
-            <li><a href="{{ route('mensagens') }}" class="nav-link px-2 fonte_header"><i class="fa-solid fa-envelope"></i> Mensagens</a></li>
+            <li><a href="{{ route('mensagens') }}" class="btn position-relative nav-link px-2 fonte_header"><i class="fa-solid fa-envelope"></i>
+             Mensagens
+                @if(isset($qtdConversaNaoLida))
+                    @if($qtdConversaNaoLida > 0)
+                        <span class="badge text-bg-badge">{{$qtdConversaNaoLida}}</span>
+                    @endif
+                @endif
+             </a></li>
         </ul>
 
         @guest

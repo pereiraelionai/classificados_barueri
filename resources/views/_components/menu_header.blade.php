@@ -14,7 +14,14 @@
             </div>
             <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.anunciosInativos()" type="submit"><i class="fa-sharp fa-solid fa-trash"></i> Anúncios Inátivos</button>
             <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.favoritos()" type="submit"><i class="fa-solid fa-heart"></i>Anúncios Favoritos</button>
-            <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.mensagens()" type="submit"><i class="fa-solid fa-envelope"></i> Mensagens</button>
+            <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.mensagens()" type="submit"><i class="fa-solid fa-envelope"></i> 
+                Mensagens
+                @if(isset($qtdConversaNaoLida))
+                    @if($qtdConversaNaoLida > 0)
+                        <span class="badge text-bg-badge">{{$qtdConversaNaoLida}}</span>
+                    @endif
+                @endif
+            </button>
         </div>
         <form class="d-flex" role="search">
             <input class="form-control mr-2" type="search" placeholder="Busca" aria-label="Search">

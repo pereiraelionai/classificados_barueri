@@ -20,9 +20,6 @@ class CreateConversasTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('mensagems', function (Blueprint $table) {
-            $table->foreign('conversas_id')->references('id')->on('conversas');
-        });
     }
 
     /**
@@ -32,10 +29,6 @@ class CreateConversasTable extends Migration
      */
     public function down()
     {   
-        Schema::table('mensagems', function(Blueprint $table) {
-            $table->dropForeign('mensagems_conversas_id_foreign');
-        });
-
         Schema::dropIfExists('conversas');
     }
 }
