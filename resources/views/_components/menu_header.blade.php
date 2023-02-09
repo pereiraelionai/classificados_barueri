@@ -15,12 +15,6 @@
             <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.anunciosInativos()" type="submit"><i class="fa-sharp fa-solid fa-trash"></i> Anúncios Inátivos</button>
             <button class="btn btn-outline mr-2 btn-my-area" onclick="MinhaArea.favoritos()" type="submit"><i class="fa-solid fa-heart"></i>Anúncios Favoritos</button>
                 
-                @if(isset($qtdConversaNaoLida))
-                    @if($qtdConversaNaoLida > 0)
-                        <span class="badge text-bg-badge">{{$qtdConversaNaoLida}}</span>
-                    @endif
-                @endif
-            </button>
         </div>
         <form class="d-flex" role="search">
             

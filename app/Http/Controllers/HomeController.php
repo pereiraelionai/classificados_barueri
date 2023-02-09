@@ -95,7 +95,19 @@ class HomeController extends Controller
 
         $qtd_anuncios = AnuncioProduto::where('ativo', '=', 1)->where('titulo', 'like', '%'.$pesquisa.'%')->count();
 
-        return view('anuncio_search')->with('anuncio_search', $anuncio_search)->with('qtd_anuncios', $qtd_anuncios);
+        $array_favorito = [];
+
+        if(auth()->user()) {
+            $user = auth()->user()->id;
+            foreach($anuncio_search as $produto) {
+                $favorito = Favorito::where('users_id', '=', $user)
+                                    ->where('anuncio_id', '=', $produto->id)
+                                    ->where('tipo_anuncios_id', '=', $produto->tipo_anuncios_id)->get();
+                $array_favorito[] = $favorito;
+            }
+        }
+
+        return view('anuncio_search')->with('anuncio_search', $anuncio_search)->with('qtd_anuncios', $qtd_anuncios)->with('favoritos', $array_favorito);
     }
 
     public function empregosOnly() {
