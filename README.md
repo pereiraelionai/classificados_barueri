@@ -1,4 +1,4 @@
-## Projeto Laravel - Classificados Barueri
+## Projeto Laravel - Classificados Barueri - (Portfólio)
 
 Projeto realizado utilizando o framework Laravel e PHP 7.4. O projeto é um sistema que aplica uma camada de proteção para acessar algumas áreas como criação de anúncios e minha área, além de utilizar AJAX para criar requisições assíncronas e evitar refresh da tela em alguns momentos.
 
